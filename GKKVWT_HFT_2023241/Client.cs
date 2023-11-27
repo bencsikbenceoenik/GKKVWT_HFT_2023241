@@ -7,6 +7,7 @@ namespace GKKVWT_HFT_2023241.Client
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            //Console.WriteLine("Using GIT!!!");
         }
     }
 }
