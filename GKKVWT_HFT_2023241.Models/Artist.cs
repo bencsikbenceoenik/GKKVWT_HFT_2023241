@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GKKVWT_HFT_2023241.Models
 {
@@ -13,9 +14,8 @@ namespace GKKVWT_HFT_2023241.Models
         public int Age { get; set; }
         public DateTime Birth { get; set; }
         public int Gender { get; set; }
-        public string SongID { get; set; }
-        public ArtistType Type { get; set;}
-        public string LabelID { get; set; }
+        public ArtistType Type { get; set; }
         public string Nationality { get; set; }
+        public List<Song> Songs { get; set; }
     }
 }

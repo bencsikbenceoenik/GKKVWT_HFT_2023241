@@ -14,5 +14,6 @@ namespace GKKVWT_HFT_2023241.Models
         public string BasedIn { get; set; }/*Country and City*/
         public DateTime FoundmentDate { get; set; }
         public string Founder { get; set; }
+        public List<Song> Songs { get; set; }
     }
 }
