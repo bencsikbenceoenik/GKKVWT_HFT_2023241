@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace GKKVWT_HFT_2023241.Models
 {
@@ -9,6 +11,8 @@ namespace GKKVWT_HFT_2023241.Models
         {
             Group,Solo
         }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ArtistID { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
@@ -16,6 +20,6 @@ namespace GKKVWT_HFT_2023241.Models
         public int Gender { get; set; }
         public ArtistType Type { get; set; }
         public string Nationality { get; set; }
-        public List<Song> Songs { get; set; }
+        public virtual List<Song> Songs { get; set; }
     }
 }
