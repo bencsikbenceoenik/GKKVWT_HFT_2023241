@@ -25,6 +25,16 @@ namespace GKKVWT_HFT_2023241.Repository.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Song>()
+            .HasOne(s => s.Artist)
+            .WithMany(a => a.Songs)
+            .HasForeignKey(s => s.ArtistId);
+
+            modelBuilder.Entity<Song>()
+                .HasOne(s => s.Label)
+                .WithMany(l => l.Songs)
+                .HasForeignKey(s => s.LabelId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

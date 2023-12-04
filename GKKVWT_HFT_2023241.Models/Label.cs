@@ -12,7 +12,7 @@ namespace GKKVWT_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int LabelID { get; set; }
+        public int LabelId { get; set; }
         public string LabelName { get; set; }
         public int LabelValue { get; set; }
         public string BasedIn { get; set; }/*Country and City*/

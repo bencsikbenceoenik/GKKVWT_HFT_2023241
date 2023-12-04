@@ -13,12 +13,16 @@ namespace GKKVWT_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string SongID { get; set; }
-        public string SongName { get; set;}
+        public string SongTitle { get; set;}
         public string SongType { get; set;}/*Genre*/
-        public string ArtistID { get; set; }
-        public string LabelID { get; set; }
-        public DateTime Released { get; set; }
-        public int Length { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public int Duration { get; set; }
         public string Language { get; set; }/*if it has more than one than it will be "mixed"*/
+        //Foreign key
+        public string ArtistId { get; set; }
+        public Artist Artist { get; set; }
+        //Foreign key
+        public string LabelId { get; set; }
+        public Label Label { get; set; }
     }
 }

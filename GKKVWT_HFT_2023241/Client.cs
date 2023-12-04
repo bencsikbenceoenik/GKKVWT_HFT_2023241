@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GKKVWT_HFT_2023241.Models;
+using System;
 
 namespace GKKVWT_HFT_2023241.Client
 {

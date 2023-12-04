@@ -13,8 +13,8 @@ namespace GKKVWT_HFT_2023241.Models
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string ArtistID { get; set; }
-        public string Name { get; set; }
+        public string ArtistId { get; set; }
+        public string ArtistName { get; set; }
         public int Age { get; set; }
         public DateTime Birth { get; set; }
         public int Gender { get; set; }
