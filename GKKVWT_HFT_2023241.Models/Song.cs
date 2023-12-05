@@ -24,5 +24,17 @@ namespace GKKVWT_HFT_2023241.Models
         //Foreign key
         public string LabelId { get; set; }
         public Label Label { get; set; }
+
+        public Song(string input)
+        {
+            SongID = input.Split('#')[0];
+            SongTitle = input.Split('#')[1];
+            SongType = input.Split('#')[2];
+            ReleaseDate = DateTime.Parse(input.Split('#')[3]);
+            Duration = int.Parse(input.Split('#')[4]);
+            Language = input.Split('#')[5];
+            ArtistId = input.Split('#')[6];
+            LabelId = input.Split('#')[7];
+        }
     }
 }
