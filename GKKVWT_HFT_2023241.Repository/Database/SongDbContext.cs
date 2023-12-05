@@ -49,7 +49,7 @@ namespace GKKVWT_HFT_2023241.Repository.Database
             new Artist("9#EXID#1991-08-12#2012#Group#Female#South Korean#"),
             new Artist("10#Monsta X#1993-01-26#2015#Group#Male#South Korean#"),
             new Artist("11#Mamamoo#1991-06-19#2014#Group#Female#South Korean#"),
-            new Artist("12#(G)I-DLE#1998-08-14#2018#Group#Female#South Korean#"),
+            new Artist("12#(G)I-DLE#1998-08-14#2018#Group#Female#South Korean#")
             //new Artist("13#ENHYPEN#2002-12-01#2020#Group#Male#South Korean#"),
             //new Artist("14#ATEEZ#1998-10-24#2018#Group#Male#South Korean#"),
             //new Artist("15#GFriend#1997-09-23#2015#Group#Female#South Korean#"),
