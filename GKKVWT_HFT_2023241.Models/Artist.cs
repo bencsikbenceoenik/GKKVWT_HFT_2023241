@@ -21,6 +21,12 @@ namespace GKKVWT_HFT_2023241.Models
         public ArtistType Type { get; set; }
         public string Nationality { get; set; }
         public virtual List<Song> Songs { get; set; }
+
+        public Artist()
+        {
+
+        }
+
         public Artist(string input)
         {
             this.ArtistId = input.Split('#')[0];

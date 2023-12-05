@@ -22,6 +22,11 @@ namespace GKKVWT_HFT_2023241.Models
         public string Founder { get; set; }
         public virtual List<Song> Songs { get; set; }
 
+        public Label()
+        {
+
+        }
+
         public Label(string input)
         {
             LabelId = int.Parse(input.Split('#')[0]);
