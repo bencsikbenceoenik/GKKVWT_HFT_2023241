@@ -1,4 +1,5 @@
-﻿using GKKVWT_HFT_2023241.Repository.Interface;
+﻿using GKKVWT_HFT_2023241.Repository.Database;
+using GKKVWT_HFT_2023241.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace GKKVWT_HFT_2023241.Repository.Repository
 {
     public abstract class Repository<T> : IRespository<T> where T : class
     {
+        protected SongDbContext ctx;
+        public Repository(SongDbContext ctx)
+        {
+            this.ctx = ctx;
+        }
         public void Create(T item)
         {
             throw new NotImplementedException();
