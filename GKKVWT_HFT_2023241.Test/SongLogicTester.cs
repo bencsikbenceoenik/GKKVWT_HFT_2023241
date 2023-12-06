@@ -50,6 +50,21 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
+        public void UpdateSongWithCorrectInput()
+        {
+            // Arrange
+            var mockRepository = new Mock<IRepository<Song>>();
+            var logic = new SongLogic(mockRepository.Object);
+            var song = new Song() { SongTitle = "TestSong" };
+
+            // Act
+            logic.Update(song);
+
+            // Assert
+            mockRepository.Verify(r => r.Update(song), Times.Once);
+        }
+
+        [Test]
         public void CreateSongTestWithCorrectTitle()
         {
             var song = new Song() { SongTitle = "Batter Up" };
