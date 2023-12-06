@@ -17,16 +17,18 @@ namespace GKKVWT_HFT_2023241.Repository.Repository
         }
         public void Create(T item)
         {
-            throw new NotImplementedException();
+            ctx.Set<T>().Add(item);
+            ctx.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            ctx.Set<T>().Remove(Read(id));
+            ctx.SaveChanges();
         }
         public IQueryable<T> ReadAll()
         {
-            throw new NotImplementedException();
+            return ctx.Set<T>();
         }
 
         public abstract T Read(int id);
