@@ -30,7 +30,42 @@ namespace GKKVWT_HFT_2023241.Test
             logic = new SongLogic(mockSongRepo.Object);
         }
 
-        
+        [Test]
+        public void GetSongsByArtistsDebutedAfterYear_ShouldReturnFilteredSongs()
+        {
+            // Arrange
+            var mockArtistRepository = new Mock<IRepository<Artist>>();
+            var mockSongRepository = new Mock<IRepository<Song>>();
+
+            var musicService = new SongLogic(mockSongRepository.Object, mockArtistRepository.Object);
+
+            // Mock data
+            var artists = new List<Artist>
+            {
+                new Artist { ArtistId = 1, DebutYear = 2010 },
+                new Artist { ArtistId = 2, DebutYear = 2005 },
+                new Artist { ArtistId = 3, DebutYear = 2015 },
+            };
+
+            var songs = new List<Song>
+            {
+                new Song { ArtistId = 1, SongTitle = "Song1" },
+                new Song { ArtistId = 2, SongTitle = "Song2" },
+                new Song { ArtistId = 3, SongTitle = "Song3" },
+            };
+
+            // Setup mock repositories
+            mockArtistRepository.Setup(repo => repo.ReadAll()).Returns(artists.AsQueryable());
+            mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
+
+            // Act
+            var result = musicService.GetSongsByArtistsDebutedAfterYear(2010);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.All(song => artists.Any(a => a.ArtistId == song.ArtistId && a.DebutYear > 2010)));
+        }
 
         [Test]
         public void GetSongsByDurationAndArtistGender_ShouldReturnFilteredSongs()
