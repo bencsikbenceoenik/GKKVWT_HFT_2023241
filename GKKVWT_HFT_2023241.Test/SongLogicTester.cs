@@ -31,6 +31,46 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
+        public void GetSongsReleasedAfterYearByNationality_ShouldReturnFilteredSongs()
+        {
+            // Arrange
+            var mockArtistRepository = new Mock<IRepository<Artist>>();
+            var mockSongRepository = new Mock<IRepository<Song>>();
+
+            var musicService = new SongLogic(mockSongRepository.Object, mockArtistRepository.Object);
+
+            // Mock data
+            var nationality = "TestNationality";
+            var releaseYear = 2000;
+
+            var artists = new List<Artist>
+            {
+                new Artist { ArtistId = 1, Nationality = nationality },
+                new Artist { ArtistId = 2, Nationality = nationality },
+                new Artist { ArtistId = 3, Nationality = "DifferentNationality" },
+            };
+
+            var songs = new List<Song>
+            {
+                new Song { SongId = 1, ArtistId = 1, ReleaseDate = new DateTime(2005, 1, 1) },
+                new Song { SongId = 2, ArtistId = 2, ReleaseDate = new DateTime(2010, 1, 1) },
+                new Song { SongId = 3, ArtistId = 3, ReleaseDate = new DateTime(2020, 1, 1) },
+            };
+
+            // Setup mock repositories
+            mockArtistRepository.Setup(repo => repo.ReadAll()).Returns(artists.AsQueryable());
+            mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
+
+            // Act
+            var result = musicService.GetSongsReleasedAfterYearByNationality(releaseYear, nationality);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.All(song => song.ReleaseDate.Year > releaseYear && artists.Any(a => a.ArtistId == song.ArtistId && a.Nationality == nationality)));
+        }
+
+        [Test]
         public void GetSongsByLabelWithValueGreaterThan_ShouldReturnFilteredSongs()
         {
             // Arrange
