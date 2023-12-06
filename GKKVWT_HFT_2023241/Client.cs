@@ -20,13 +20,24 @@ namespace GKKVWT_HFT_2023241.Client
 
         static void Create(string entity)
         {
-            //if (entity == "Actor")
-            //{
-            //    Console.Write("Enter Actor Name: ");
-            //    string name = Console.ReadLine();
-            //    rest.Post(new Actor() { ActorName = name }, "actor");
-            //}
-            Console.WriteLine(entity + " create");
+            switch (entity)
+            {
+                case "Song":
+                    Console.WriteLine("Enter Song Name: ");
+                    string songName = Console.ReadLine();
+                    songLogic.Create(new Song() { SongTitle = songName});
+                    break;
+                case "Artist":
+                    Console.WriteLine("Enter Artist Name: ");
+                    string artistName = Console.ReadLine();
+                    artistLogic.Create(new Artist() { ArtistName = artistName });
+                    break;
+                case "Label":
+                    Console.WriteLine("Enter Label Name: ");
+                    string labelName = Console.ReadLine();
+                    labelLogic.Create(new Label() { LabelName = labelName });
+                    break;
+            }
             Console.ReadLine();
         }
 
@@ -68,8 +79,6 @@ namespace GKKVWT_HFT_2023241.Client
                         Console.WriteLine(item.LabelId + "\t" + item.LabelName);
                     }
                     break;
-                default:
-                    break;
             }
             Console.ReadLine();
         }
@@ -87,7 +96,36 @@ namespace GKKVWT_HFT_2023241.Client
             //    rest.Put(one, "actor");
             //}
 
-            Console.WriteLine(entity + " update");
+            switch (entity)
+            {
+                case "Artist":
+                    Console.Write("Enter Actor's id to update: ");
+                    int artistId = int.Parse(Console.ReadLine());
+                    Artist artistOne = artistLogic.Read(artistId);
+                    Console.Write($"New name [old: {artistOne.ArtistName}]: ");
+                    string artistName = Console.ReadLine();
+                    artistOne.ArtistName = artistName;
+                    artistLogic.Update(artistOne);
+                    break;
+                case "Song":
+                    Console.Write("Enter Song's id to update: ");
+                    int songId = int.Parse(Console.ReadLine());
+                    Song songOne = songLogic.Read(songId);
+                    Console.Write($"New name [old: {songOne.SongId}]: ");
+                    string songName = Console.ReadLine();
+                    songOne.SongTitle = songName;
+                    songLogic.Update(songOne);
+                    break;
+                case "Label":
+                    Console.Write("Enter Label's id to update: ");
+                    int labelId = int.Parse(Console.ReadLine());
+                    Label labelOne = labelLogic.Read(labelId);
+                    Console.Write($"New name [old: {labelOne.LabelName}]: ");
+                    string labelName = Console.ReadLine();
+                    labelOne.LabelName = labelName;
+                    labelLogic.Update(labelOne);
+                    break;
+            }
             Console.ReadLine();
         }
         static void Delete(string entity)
@@ -100,7 +138,24 @@ namespace GKKVWT_HFT_2023241.Client
             //    rest.Delete(id, "actor");
             //}
 
-            Console.WriteLine(entity + " delete");
+            switch (entity)
+            {
+                case "Artist":
+                    Console.WriteLine("Enter Artist's id to delete: ");
+                    int artistId = int.Parse(Console.ReadLine());
+                    artistLogic.Delete(artistId);
+                    break;
+                case "Song":
+                    Console.WriteLine("Enter Song's id to delete: ");
+                    int songId = int.Parse(Console.ReadLine());
+                    songLogic.Delete(songId);
+                    break;
+                case "Label":
+                    Console.WriteLine("Enter Label's id to delete: ");
+                    int labelId = int.Parse(Console.ReadLine());
+                    labelLogic.Delete(labelId);
+                    break;
+            }
             Console.ReadLine();
         }
         static void Main(string[] args)
