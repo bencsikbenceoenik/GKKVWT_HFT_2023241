@@ -50,6 +50,16 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
+        public void CreateSongTestWithCorrectTitle()
+        {
+            var song = new Song() { SongTitle = "Batter Up" };
+            //ACT
+            logic.Create(song);
+            //ASSERT
+            mockMovieRepo.Verify(r => r.Create(song), Times.Once);
+        }
+
+        [Test]
         public void CreateSongTestWithNullTitle()
         {
             // Arrange
