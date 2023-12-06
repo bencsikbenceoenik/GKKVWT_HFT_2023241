@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
 {
-    public class LabelRepository : Repository<Label>, IRespository<Label>
+    public class LabelRepository : Repository<Label>, IRepository<Label>
     {
         public LabelRepository(SongDbContext ctx) : base(ctx)
         {

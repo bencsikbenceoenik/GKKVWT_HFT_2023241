@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GKKVWT_HFT_2023241.Repository.Repository
 {
-    public abstract class Repository<T> : IRespository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected SongDbContext ctx;
         public Repository(SongDbContext ctx)

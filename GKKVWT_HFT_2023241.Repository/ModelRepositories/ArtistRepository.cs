@@ -10,7 +10,7 @@ using GKKVWT_HFT_2023241.Repository.Database;
 
 namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
 {
-    public class ArtistRepository : Repository<Artist>, IRespository<Artist>
+    public class ArtistRepository : Repository<Artist>, IRepository<Artist>
     {
         public ArtistRepository(SongDbContext ctx) : base(ctx)
         {

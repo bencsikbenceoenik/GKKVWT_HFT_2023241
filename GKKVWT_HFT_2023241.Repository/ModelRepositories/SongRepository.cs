@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
 {
-    public class SongRepository : Repository<Song>, IRespository<Song>
+    public class SongRepository : Repository<Song>, IRepository<Song>
     {
         public SongRepository(SongDbContext ctx) : base(ctx)
         {
