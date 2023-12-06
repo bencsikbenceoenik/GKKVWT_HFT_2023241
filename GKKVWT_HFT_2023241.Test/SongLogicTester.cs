@@ -14,42 +14,21 @@ namespace GKKVWT_HFT_2023241.Test
     public class SongLogicTester
     {
         SongLogic logic;
-        Mock<IRepository<Song>> mockSongRepo;
-        Mock<IRepository<Artist>> mockArtistRepo;
-        Mock<IRepository<Label>> mockLabelRepo;
+        Mock<IRepository<Song>> mockMovieRepo;
 
         [SetUp]
         public void Init()
         {
-            mockSongRepo = new Mock<IRepository<Song>>();
-            mockArtistRepo = new Mock<IRepository<Artist>>();
-            mockLabelRepo = new Mock<IRepository<Label>>();
-            mockSongRepo.Setup(m => m.ReadAll()).Returns(new List<Song>()
+            mockMovieRepo = new Mock<IRepository<Song>>();
+            mockMovieRepo.Setup(m => m.ReadAll()).Returns(new List<Song>()
             {
                 new Song("1#SongA#Type#2016-09-14#200#English#1#2#"),
                 new Song("2#SongB#Type#2016-12-30#193#English#2#1#"),
                 new Song("3#SongC#Type#2020-01-11#212#Korean#3#3#"),
                 new Song("4#SongD#Type#2022-05-01#224#Korean#4#4#"),
             }.AsQueryable());
-            mockArtistRepo.Setup(m => m.ReadAll()).Returns(new List<Artist>()
-            {
-                new Artist("1#SongA#Type#2016-09-14#200#English#1#2#"),
-                new Artist("2#SongB#Type#2016-12-30#193#English#2#1#"),
-                new Artist("3#SongC#Type#2020-01-11#212#Korean#3#3#"),
-                new Artist("4#SongD#Type#2022-05-01#224#Korean#4#4#"),
-            }.AsQueryable());
-            mockLabelRepo.Setup(m => m.ReadAll()).Returns(new List<Label>()
-            {
-                new Label("1#SongA#Type#2016-09-14#200#English#1#2#"),
-                new Label("2#SongB#Type#2016-12-30#193#English#2#1#"),
-                new Label("3#SongC#Type#2020-01-11#212#Korean#3#3#"),
-                new Label("4#SongD#Type#2022-05-01#224#Korean#4#4#"),
-            }.AsQueryable());
-            logic = new SongLogic(mockSongRepo.Object,mockArtistRepo.Object,mockLabelRepo.Object);
+            logic = new SongLogic(mockMovieRepo.Object);
         }
-
-        
-
         [Test]
         public void ReadAll_ShouldReturnAllItemsFromRepository()
         {
@@ -92,7 +71,7 @@ namespace GKKVWT_HFT_2023241.Test
             //ACT
             logic.Create(song);
             //ASSERT
-            mockSongRepo.Verify(r => r.Create(song), Times.Once);
+            mockMovieRepo.Verify(r => r.Create(song), Times.Once);
         }
 
         [Test]
@@ -120,7 +99,7 @@ namespace GKKVWT_HFT_2023241.Test
 
             }
             //ASSERT
-            mockSongRepo.Verify(r => r.Create(song), Times.Never);
+            mockMovieRepo.Verify(r => r.Create(song), Times.Never);
         }
     }
 }
