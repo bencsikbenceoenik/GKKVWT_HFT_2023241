@@ -20,7 +20,7 @@ namespace GKKVWT_HFT_2023241.Models
         public int Duration { get; set; }
         public string Language { get; set; }/*if it has more than one than it will be "mixed"*/
         //Foreign key
-        public string ArtistId { get; set; }
+        public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
         //Foreign key
         public int LabelId { get; set; }
@@ -39,7 +39,7 @@ namespace GKKVWT_HFT_2023241.Models
             ReleaseDate = DateTime.Parse(input.Split('#')[3]);
             Duration = int.Parse(input.Split('#')[4]);
             Language = input.Split('#')[5];
-            ArtistId = input.Split('#')[6];
+            ArtistId = int.Parse(input.Split('#')[6]);
             LabelId = int.Parse(input.Split('#')[7]);
         }
     }
