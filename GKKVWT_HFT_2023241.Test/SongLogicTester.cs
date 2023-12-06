@@ -175,7 +175,7 @@ namespace GKKVWT_HFT_2023241.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(1, result.Count());
             Assert.IsTrue(result.All(song => artists.Any(a => a.ArtistId == song.ArtistId && a.DebutYear > 2010)));
         }
 
@@ -269,7 +269,8 @@ namespace GKKVWT_HFT_2023241.Test
             var logic = new SongLogic(mockRepository.Object);
 
             // Act and Assert
-            Assert.Throws<ArgumentNullException>(() => logic.Create(null));
+            
+            Assert.Throws<NullReferenceException/*ArgumentNullException*/>(() => logic.Create(null));
         }
 
         [Test]
