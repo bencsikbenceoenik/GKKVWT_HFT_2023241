@@ -31,6 +31,39 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
+        public void GetSongsByLabelWithValueGreaterThan_ShouldReturnFilteredSongs()
+        {
+            // Arrange
+            var mockLabelRepository = new Mock<IRepository<Label>>();
+            var mockSongRepository = new Mock<IRepository<Song>>();
+
+            var musicService = new SongLogic(mockSongRepository.Object, null, mockLabelRepository.Object);
+
+            // Mock data
+            var labelName = "TestLabel";
+            var label = new Label { LabelId = 1, LabelName = labelName, LabelValue = 50.0 };
+
+            var songs = new List<Song>
+            {
+                new Song { SongId = 1, LabelId = label.LabelId, SongTitle = "Song1" },
+                new Song { SongId = 2, LabelId = label.LabelId, SongTitle = "Song2" },
+                new Song { SongId = 3, LabelId = 2, SongTitle = "Song3" }, // Different label
+            };
+
+            // Setup mock repositories
+            mockLabelRepository.Setup(repo => repo.ReadAll()).Returns(new List<Label> { label }.AsQueryable());
+            mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
+
+            // Act
+            var result = musicService.GetSongsByLabelWithValueGreaterThan(40.0, labelName);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.All(song => song.LabelId == label.LabelId && label.LabelValue > 40.0));
+        }
+
+        [Test]
         public void GetSongsByArtistsDebutedAfterYear_ShouldReturnFilteredSongs()
         {
             // Arrange
