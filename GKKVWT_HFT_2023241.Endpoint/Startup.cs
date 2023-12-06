@@ -1,8 +1,15 @@
+using GKKVWT_HFT_2023241.Repository;
+using GKKVWT_HFT_2023241.Logic;
+using GKKVWT_HFT_2023241.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +23,11 @@ namespace GKKVWT_HFT_2023241.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            //services.AddSwaggerGen(c =>
+            //{ 
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GKKVWT_HFT_2023241.Endpoint", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

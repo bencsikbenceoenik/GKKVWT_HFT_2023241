@@ -20,12 +20,28 @@ namespace GKKVWT_HFT_2023241.Client
 
         static void Create(string entity)
         {
+            //if (entity == "Actor")
+            //{
+            //    Console.Write("Enter Actor Name: ");
+            //    string name = Console.ReadLine();
+            //    rest.Post(new Actor() { ActorName = name }, "actor");
+            //}
             Console.WriteLine(entity + " create");
             Console.ReadLine();
         }
 
         static void List(string entity)
         {
+            //if (entity == "Actor")
+            //{
+            //    List<Actor> actors = rest.Get<Actor>("actor");
+            //    foreach (var item in actors)
+            //    {
+            //        Console.WriteLine(item.ActorId + ": " + item.ActorName);
+            //    }
+            //}
+
+
             switch (entity)
             {
                 case "Song":
@@ -59,11 +75,31 @@ namespace GKKVWT_HFT_2023241.Client
         }
         static void Update(string entity)
         {
+
+            //if (entity == "Actor")
+            //{
+            //    Console.Write("Enter Actor's id to update: ");
+            //    int id = int.Parse(Console.ReadLine());
+            //    Actor one = rest.Get<Actor>(id, "actor");
+            //    Console.Write($"New name [old: {one.ActorName}]: ");
+            //    string name = Console.ReadLine();
+            //    one.ActorName = name;
+            //    rest.Put(one, "actor");
+            //}
+
             Console.WriteLine(entity + " update");
             Console.ReadLine();
         }
         static void Delete(string entity)
         {
+
+            //if (entity == "Actor")
+            //{
+            //    Console.Write("Enter Actor's id to delete: ");
+            //    int id = int.Parse(Console.ReadLine());
+            //    rest.Delete(id, "actor");
+            //}
+
             Console.WriteLine(entity + " delete");
             Console.ReadLine();
         }
