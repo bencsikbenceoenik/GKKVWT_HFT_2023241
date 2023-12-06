@@ -1,4 +1,5 @@
 ﻿using GKKVWT_HFT_2023241.Models;
+using GKKVWT_HFT_2023241.Repository.Database;
 using GKKVWT_HFT_2023241.Repository.Interface;
 using GKKVWT_HFT_2023241.Repository.Repository;
 using System;
@@ -11,6 +12,23 @@ namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
 {
     public class SongRepository : Repository<Song>, IRespository<Song>
     {
+        public SongRepository(SongDbContext ctx) : base(ctx)
+        {
+        }
 
+        public override Song Read(int id)
+        {
+            return ctx.Songs.FirstOrDefault(t => t.SongId == id);
+        }
+
+        public override void Update(Song item)
+        {
+           var prev = Read(item.SongId);
+            foreach (var prop in prev.GetType().GetProperties())
+            {
+                prop.SetValue(prev, prop.GetValue(item));
+            }
+            ctx.SaveChanges();
+        }
     }
 }

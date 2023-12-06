@@ -12,7 +12,7 @@ namespace GKKVWT_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string SongID { get; set; }
+        public int SongId { get; set; }
         public string SongTitle { get; set;}
         public string SongType { get; set;}/*Genre*/
         public DateTime ReleaseDate { get; set; }
@@ -32,7 +32,7 @@ namespace GKKVWT_HFT_2023241.Models
 
         public Song(string input)
         {
-            SongID = input.Split('#')[0];
+            SongId = int.Parse(input.Split('#')[0]);
             SongTitle = input.Split('#')[1];
             SongType = input.Split('#')[2];
             ReleaseDate = DateTime.Parse(input.Split('#')[3]);
