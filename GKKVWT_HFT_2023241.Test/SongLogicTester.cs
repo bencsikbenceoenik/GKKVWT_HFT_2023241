@@ -29,5 +29,22 @@ namespace GKKVWT_HFT_2023241.Test
             }.AsQueryable());
             logic = new SongLogic(mockMovieRepo.Object);
         }
+
+        [Test]
+        public void CreateSongTestWithInCorrectTitle()
+        {
+            var song = new Song() { SongTitle = "less" };
+            try
+            {
+                //ACT
+                logic.Create(song);
+            }
+            catch
+            {
+
+            }
+            //ASSERT
+            mockMovieRepo.Verify(r => r.Create(song), Times.Never);
+        }
     }
 }
