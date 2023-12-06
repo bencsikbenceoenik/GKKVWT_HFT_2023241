@@ -29,6 +29,36 @@ namespace GKKVWT_HFT_2023241.Test
             }.AsQueryable());
             logic = new SongLogic(mockMovieRepo.Object);
         }
+        [Test]
+        public void ReadAll_ShouldReturnAllItemsFromRepository()
+        {
+            // Arrange
+            var mockRepository = new Mock<IRepository<Song>>();
+            var service = new SongLogic(mockRepository.Object);
+            var data = new List<Song>()
+            {
+                new Song("1#SongA#Type#2016-09-14#200#English#1#2#"),
+                new Song("2#SongB#Type#2016-12-30#193#English#2#1#"),
+                new Song("3#SongC#Type#2020-01-11#212#Korean#3#3#"),
+                new Song("4#SongD#Type#2022-05-01#224#Korean#4#4#"),
+            }.AsQueryable();
+            mockRepository.Setup(repo => repo.ReadAll()).Returns(data);
+            // Act
+            var result = service.ReadAll();
+            // Assert
+            Assert.AreEqual(data, result);
+        }
+
+        [Test]
+        public void CreateSongTestWithNullTitle()
+        {
+            // Arrange
+            var mockRepository = new Mock<IRepository<Song>>();
+            var logic = new SongLogic(mockRepository.Object);
+
+            // Act and Assert
+            Assert.Throws<ArgumentNullException>(() => logic.Create(null));
+        }
 
         [Test]
         public void CreateSongTestWithInCorrectTitle()
