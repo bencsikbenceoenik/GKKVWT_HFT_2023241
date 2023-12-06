@@ -13,6 +13,7 @@ namespace GKKVWT_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SongId { get; set; }
+        [StringLength(100)]
         public string SongTitle { get; set;}
         public string SongType { get; set;}/*Genre*/
         public DateTime ReleaseDate { get; set; }

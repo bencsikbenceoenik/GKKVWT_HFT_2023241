@@ -18,6 +18,10 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
         }
         public void Create(Song item)
         {
+            if (item.SongTitle.Length < 5)
+            {
+                throw new ArgumentException("Title too short");
+            }
             this.repo.Create(item);
         }
 
