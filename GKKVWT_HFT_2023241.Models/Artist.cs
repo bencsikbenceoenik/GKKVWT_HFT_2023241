@@ -13,7 +13,7 @@ namespace GKKVWT_HFT_2023241.Models
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string ArtistId { get; set; }
+        public int ArtistId { get; set; }
         public string ArtistName { get; set; }
         public int Age { get; set; }
         public int DebutYear { get; set; }
@@ -29,7 +29,7 @@ namespace GKKVWT_HFT_2023241.Models
 
         public Artist(string input)
         {
-            this.ArtistId = input.Split('#')[0];
+            this.ArtistId = int.Parse(input.Split('#')[0]);
             this.ArtistName = input.Split('#')[1];
             this.Type = (ArtistType)Enum.Parse(typeof(ArtistType), input.Split('#')[4]);
             if (Type == ArtistType.Group)
