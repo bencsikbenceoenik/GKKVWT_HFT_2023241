@@ -31,6 +31,45 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
+        public void GetSongsByArtistAndLabel_ShouldReturnFilteredSongs()
+        {
+            // Arrange
+            var mockArtistRepository = new Mock<IRepository<Artist>>();
+            var mockLabelRepository = new Mock<IRepository<Label>>();
+            var mockSongRepository = new Mock<IRepository<Song>>();
+
+            var musicService = new SongLogic(mockSongRepository.Object, mockArtistRepository.Object, mockLabelRepository.Object);
+
+            // Mock data
+            var artistName = "TestArtist";
+            var labelName = "TestLabel";
+
+            var artist = new Artist { ArtistId = 1, ArtistName = artistName };
+            var label = new Label { LabelId = 1, LabelName = labelName };
+
+            var songs = new List<Song>
+            {
+                new Song { SongId = 1, ArtistId = artist.ArtistId, LabelId = label.LabelId, SongTitle = "Song1" },
+                new Song { SongId = 2, ArtistId = artist.ArtistId, LabelId = label.LabelId, SongTitle = "Song2" },
+                new Song { SongId = 3, ArtistId = 2, LabelId = label.LabelId, SongTitle = "Song3" }, // Different artist
+                new Song { SongId = 4, ArtistId = artist.ArtistId, LabelId = 2, SongTitle = "Song4" }, // Different label
+            };
+
+            // Setup mock repositories
+            mockArtistRepository.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist }.AsQueryable());
+            mockLabelRepository.Setup(repo => repo.ReadAll()).Returns(new List<Label> { label }.AsQueryable());
+            mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
+
+            // Act
+            var result = musicService.GetSongsByArtistAndLabel(artistName, labelName);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.All(song => song.ArtistId == artist.ArtistId && song.LabelId == label.LabelId));
+        }
+
+        [Test]
         public void GetSongsReleasedAfterYearByNationality_ShouldReturnFilteredSongs()
         {
             // Arrange
