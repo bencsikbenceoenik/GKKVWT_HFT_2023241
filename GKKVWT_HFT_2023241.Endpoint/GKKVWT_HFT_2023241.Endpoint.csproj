@@ -14,8 +14,4 @@
     <ProjectReference Include="..\GKKVWT_HFT_2023241.Repository\GKKVWT_HFT_2023241.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
