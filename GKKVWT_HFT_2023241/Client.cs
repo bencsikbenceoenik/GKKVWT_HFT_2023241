@@ -65,6 +65,7 @@ namespace GKKVWT_HFT_2023241.Client
                     }
                     break;
             }
+            Console.ReadLine();
         }
         static void Update(string entity)
         {
@@ -120,10 +121,11 @@ namespace GKKVWT_HFT_2023241.Client
                     rest.Delete(labelId, "label");
                     break;
             }
+            Console.ReadLine();
         }
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:53910/", "song");
+            rest = new RestService("http://localhost:40338/", "song");
 
             var songSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Song"))
