@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace GKKVWT_HFT_2023241.Models
 {
@@ -20,6 +21,7 @@ namespace GKKVWT_HFT_2023241.Models
         public string BasedIn { get; set; }/*Country and City*/
         public DateTime FoundmentDate { get; set; }
         public string Founder { get; set; }
+        [JsonIgnore]
         public virtual List<Song> Songs { get; set; }
 
         public Label()
