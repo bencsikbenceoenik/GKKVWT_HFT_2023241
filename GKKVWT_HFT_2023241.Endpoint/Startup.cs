@@ -1,3 +1,9 @@
+using GKKVWT_HFT_2023241.Logic.Classes;
+using GKKVWT_HFT_2023241.Logic.Interfaces;
+using GKKVWT_HFT_2023241.Models;
+using GKKVWT_HFT_2023241.Repository.Database;
+using GKKVWT_HFT_2023241.Repository.Interface;
+using GKKVWT_HFT_2023241.Repository.ModelRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +31,16 @@ namespace GKKVWT_HFT_2023241.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddTransient<SongDbContext>();
+
+            services.AddTransient<IRepository<Artist>, ArtistRepository>();
+            services.AddTransient<IRepository<Song>, SongRepository>();
+            services.AddTransient<IRepository<Label>, LabelRepository>();
+
+            services.AddTransient<IArtistLogic, ArtistLogic>();
+            services.AddTransient<ISongLogic, SongLogic>();
+            services.AddTransient<ILabelLogic, LabelLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
