@@ -12,6 +12,7 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 {
     public class SongLogic : ISongLogic
     {
+
         IRepository<Song> songRepo;
         IRepository<Artist> artistRepo;
         IRepository<Label> labelRepo;

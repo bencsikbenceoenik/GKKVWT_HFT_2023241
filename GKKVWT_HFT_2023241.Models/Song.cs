@@ -26,6 +26,7 @@ namespace GKKVWT_HFT_2023241.Models
         public virtual Artist Artist { get; set; }
         //Foreign key
         public int LabelId { get; set; }
+
         public virtual Label Label { get; set; }
 
         public Song()

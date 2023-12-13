@@ -26,7 +26,10 @@ namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
             var prev = Read(item.LabelId);
             foreach (var prop in prev.GetType().GetProperties())
             {
-                prop.SetValue(prev, prop.GetValue(item));
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(prev, prop.GetValue(item));
+                }
             }
             ctx.SaveChanges();
         }

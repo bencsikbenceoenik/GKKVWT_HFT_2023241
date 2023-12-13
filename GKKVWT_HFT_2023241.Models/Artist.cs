@@ -21,6 +21,7 @@ namespace GKKVWT_HFT_2023241.Models
         public string Gender { get; set; }
         public ArtistType Type { get; set; }
         public string Nationality { get; set; }
+        [JsonIgnore]
         public virtual List<Song> Songs { get; set; }
 
         public Artist()

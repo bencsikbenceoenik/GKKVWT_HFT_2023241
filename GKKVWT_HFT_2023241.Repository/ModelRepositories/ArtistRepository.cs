@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GKKVWT_HFT_2023241.Repository.Database;
+using System.Security.Cryptography;
 
 namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
 {
@@ -26,7 +27,10 @@ namespace GKKVWT_HFT_2023241.Repository.ModelRepositories
             var prev = Read(item.ArtistId);
             foreach (var prop in prev.GetType().GetProperties())
             {
-                prop.SetValue(prev, prop.GetValue(item));
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(prev, prop.GetValue(item));
+                }
             }
             ctx.SaveChanges();
         }

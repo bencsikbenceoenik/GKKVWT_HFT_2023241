@@ -25,7 +25,7 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
         public Artist Read(int id)
         {
-            return this.Read(id);
+            return this.repo.Read(id);
         }
 
         public IQueryable<Artist> ReadAll()

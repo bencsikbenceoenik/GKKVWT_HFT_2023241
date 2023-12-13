@@ -1,11 +1,7 @@
 ﻿using ConsoleTools;
 using GKKVWT_HFT_2023241.Models;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Xml.Linq;
+using System.Net.Http;
 
 namespace GKKVWT_HFT_2023241.Client
 {
@@ -123,12 +119,70 @@ namespace GKKVWT_HFT_2023241.Client
             }
             Console.ReadLine();
         }
+        static void GetSongsByDurationAndArtistGender()
+        {
+
+        }
+
+        static void GetSongsByArtistsDebutedAfterYear()
+        {
+
+        }
+
+        static void GetSongsByLabelWithValueGreaterThan()
+        {
+
+        }
+
+        static void GetSongsReleasedAfterYearByNationality()
+        {
+
+        }
+
+        static void GetSongsByArtistAndLabel()
+        {
+
+        }
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:40338/", "song");
 
+            HttpClient client;
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:40338/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue
+                ("application/json"));
+            try
+            {
+                client.GetAsync("").GetAwaiter().GetResult();
+            }
+            catch (HttpRequestException)
+            {
+                throw new ArgumentException("Endpoint is not available!");
+            }
+            try
+            {
+                HttpResponseMessage response = client.GetAsync("label" + "/" + 1.ToString()).GetAwaiter().GetResult();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            //GetSongsByDurationAndArtistGender
+            //GetSongsByArtistsDebutedAfterYear
+            //GetSongsByLabelWithValueGreaterThan
+            //GetSongsReleasedAfterYearByNationality
+            //GetSongsByArtistAndLabel
             var songSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Song"))
+                .Add("GetSongsByDurationAndArtistGender", () => List("Song"))
+                .Add("GetSongsByArtistsDebutedAfterYear", () => List("Song"))
+                .Add("GetSongsByLabelWithValueGreaterThan", () => List("Song"))
+                .Add("GetSongsReleasedAfterYearByNationality", () => List("Song"))
+                .Add("GetSongsByArtistAndLabel", () => List("Song"))
                 .Add("Create", () => Create("Song"))
                 .Add("Delete", () => Delete("Song"))
                 .Add("Update", () => Update("Song"))
@@ -155,6 +209,8 @@ namespace GKKVWT_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
+            
+            
         }
     }
 }
