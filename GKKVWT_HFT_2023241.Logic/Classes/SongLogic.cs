@@ -39,7 +39,7 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
             // Retrieve songs with a duration longer than the threshold by artists with the specified gender
             var songs = songRepo.ReadAll()
-                .Where(s => s.Duration > durationThreshold).Where(s => artists.Contains(s.Artist));
+                .Where(s => s.Duration > durationThreshold).Where(s => artists.Select(a => a.ArtistId).ToList().Contains(s.ArtistId));
 
             return songs;
         }
@@ -51,13 +51,13 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
             // Retrieve songs released by those artists
             var songs = songRepo.ReadAll()
-                .Where(s => artists.Contains(s.Artist));
+                .Where(s => artists.Select(a => a.ArtistId).ToList().Contains(s.ArtistId));
 
             return songs;
         }
         public IEnumerable<Song> GetSongsByLabelValueGreaterThan(double thresholdValue)
         {
-            // Retrieve the label by name
+            // Retrieve labels with labelvalue grater than threshold
             var labels = labelRepo.ReadAll().Where(l => l.LabelValue > thresholdValue).ToList();
             if (labels == null)
             {
@@ -65,7 +65,7 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
             }
             // Retrieve songs from labels with label value greater than the threshold
             var songs = songRepo.ReadAll()
-               .Where(s => labels.Contains(s.Label));
+               .Where(s => labels.Select(l => l.LabelId).ToList().Contains(s.LabelId)); 
 
             return songs;
         }
@@ -77,7 +77,7 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
             // Retrieve songs released after a certain year by artists of the specified nationality
             var songs = songRepo.ReadAll()
-                .Where(s => s.ReleaseDate.Year > releaseYear).Where(s => artists.Contains(s.Artist));
+                .Where(s => s.ReleaseDate.Year > releaseYear).Where(s => artists.Select(a => a.ArtistId).ToList().Contains(s.ArtistId));
 
             return songs;
         }

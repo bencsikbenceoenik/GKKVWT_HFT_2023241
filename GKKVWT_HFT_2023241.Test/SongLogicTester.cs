@@ -41,11 +41,8 @@ namespace GKKVWT_HFT_2023241.Test
             var musicService = new SongLogic(mockSongRepository.Object, mockArtistRepository.Object, mockLabelRepository.Object);
 
             // Mock data
-            var artistName = "TestArtist";
-            var labelName = "TestLabel";
-
-            var artist = new Artist { ArtistId = 1, ArtistName = artistName };
-            var label = new Label { LabelId = 1, LabelName = labelName };
+            var artist = new Artist { ArtistId = 1, ArtistName = "TESTARTIST" };
+            var label = new Label { LabelId = 1, LabelName = "TESTLABEL" };
 
             var songs = new List<Song>
             {
@@ -61,7 +58,7 @@ namespace GKKVWT_HFT_2023241.Test
             mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
 
             // Act
-            var result = musicService.GetSongsByArtistAndLabel(artistName, labelName);
+            var result = musicService.GetSongsByArtistAndLabel(artist.ArtistName, label.LabelName);
 
             // Assert
             Assert.IsNotNull(result);
@@ -110,7 +107,7 @@ namespace GKKVWT_HFT_2023241.Test
         }
 
         [Test]
-        public void GetSongsByLabelWithValueGreaterThan_ShouldReturnFilteredSongs()
+        public void GetSongsByLabelValueGreaterThan_ShouldReturnFilteredSongs()
         {
             // Arrange
             var mockLabelRepository = new Mock<IRepository<Label>>();
@@ -119,8 +116,7 @@ namespace GKKVWT_HFT_2023241.Test
             var musicService = new SongLogic(mockSongRepository.Object, null, mockLabelRepository.Object);
 
             // Mock data
-            var labelName = "TestLabel";
-            var label = new Label { LabelId = 1, LabelName = labelName, LabelValue = 50.0 };
+            var label = new Label { LabelId = 1, LabelName = "TestLabel", LabelValue = 50.0 };
 
             var songs = new List<Song>
             {
@@ -134,7 +130,7 @@ namespace GKKVWT_HFT_2023241.Test
             mockSongRepository.Setup(repo => repo.ReadAll()).Returns(songs.AsQueryable());
 
             // Act
-            var result = musicService.GetSongsByLabelWithValueGreaterThan(40.0, labelName);
+            var result = musicService.GetSongsByLabelValueGreaterThan(40.0);
 
             // Assert
             Assert.IsNotNull(result);

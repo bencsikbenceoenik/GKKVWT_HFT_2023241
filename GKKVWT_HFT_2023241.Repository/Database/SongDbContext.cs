@@ -25,7 +25,6 @@ namespace GKKVWT_HFT_2023241.Repository.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Artist>();
 
             modelBuilder.Entity<Song>(song => song
             .HasOne(song => song.Artist)
@@ -50,21 +49,6 @@ namespace GKKVWT_HFT_2023241.Repository.Database
             new Artist("10#MONSTA X#1993-01-26#2015#Group#Male#South Korean#"),
             new Artist("11#MAMAMOO#1991-06-19#2014#Group#Female#South Korean#"),
             new Artist("12#(G)I-DLE#1998-08-14#2018#Group#Female#South Korean#")
-            //new Artist("13#ENHYPEN#2002-12-01#2020#Group#Male#South Korean#"),
-            //new Artist("14#ATEEZ#1998-10-24#2018#Group#Male#South Korean#"),
-            //new Artist("15#GFriend#1997-09-23#2015#Group#Female#South Korean#"),
-            //new Artist("16#Tomorrow X Together#2001-12-05#2019#Group#Male#South Korean#"),
-            //new Artist("17#IZ*ONE#1998-04-29#2018#Group#Female#South Korean#"),
-            //new Artist("18#Super Junior#1983-11-06#2005#Group#Male#South Korean#"),
-            //new Artist("19#Dreamcatcher#1997-05-09#2014#Group#Female#South Korean#"),
-            //new Artist("20#CLC#1997-03-19#2015#Group#Female#South Korean#"),
-            //new Artist("21#LOONA#1996-11-21#2016#Group#Female#South Korean#"),
-            //new Artist("22#IVE#2001-06-27#2021#Group#Female#South Korean#"),
-            //new Artist("23#PURPLE KISS#2001-12-09#2021#Group#Female#South Korean#"),
-            //new Artist("24#TRI.BE#2005-01-07#2021#Group#Female#South Korean#"),
-            //new Artist("25#STAYC#2002-01-08#2020#Group#Female#South Korean#"),
-            //new Artist("26#IU#1993-05-16#2008#Solo#Female#South Korean#"),
-            //new Artist("27#CHUNG HA#1996-02-09#2016#Solo#Female#South Korean#")
             );
 
             modelBuilder.Entity<Song>().HasData(
@@ -200,16 +184,6 @@ namespace GKKVWT_HFT_2023241.Repository.Database
             new Label("6#STARSHIP ENTERTAINMENT#1 Billion#South Korea#2014-05-14#Kim Shi-dae#"),
             new Label("7#RAINBOW BRIDGE WORLD#200 Million#South Korea#2014-06-19#Kim Do-hoon#"),
             new Label("8#CUBE ENTERTAINMENT#120 Million#South Korea#2018-05-02#Hong Seung-sung#")
-            //new Label("9#Belift Lab#150 Million#South Korea#2020-11-30#Bang Si-hyuk#"),
-            //new Label("10#KQ Entertainment#50 Million#South Korea#2018-10-24#Kim Gyu-wook#"),
-            //new Label("11#Source Music#20 Million#South Korea#2015-01-15#So Sung-jin#"),
-            //new Label("12#Happy Face Entertainment#10 Million#South Korea#2014-09-18#Lee Jong-min#"),
-            //new Label("13#Blockberry Creative#10 Million#South Korea#2016-10-02#Jang Won-young#"),
-            //new Label("14#Swing Entertainment#50 Million#South Korea#2021-12-01#Kim Yong-bum#"),
-            //new Label("15#Universal Music#75 Million#South Korea#2021-02-17#Shinsadong Tiger#"),
-            //new Label("16#High Up Entertainment#15 Million#South Korea#2020-11-12#Black Eyed Pilseung#"),
-            //new Label("17#EDAM Entertainment#120 Million#South Korea#2007-09-24#Lee Jong-hoon#"),
-            //new Label("18#MNH Entertainment#12 Million#South Korea#2016-06-21#Kim Chungha#")
             );
         }
     }
