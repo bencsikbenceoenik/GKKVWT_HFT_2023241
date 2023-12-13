@@ -42,13 +42,13 @@ namespace GKKVWT_HFT_2023241.Repository.Database
             new Artist("2#BLACKPINK#1996-01-03#2016#Group#Female#South Korean#"),
             new Artist("3#EXO#1992-09-21#2012#Group#Male#South Korean#"),
             new Artist("4#TWICE#1999-02-01#2015#Group#Female#South Korean#"),
-            new Artist("5#Red Velvet#1991-03-29#2014#Group#Female#South Korean#"),
+            new Artist("5#RED VELVET#1991-03-29#2014#Group#Female#South Korean#"),
             new Artist("6#ITZY#2000-08-20#2019#Group#Female#South Korean#"),
             new Artist("7#NCT 127#1995-07-01#2016#Group#Male#South Korean#"),
-            new Artist("8#Stray Kids#2000-09-14#2018#Group#Male#South Korean#"),
+            new Artist("8#STRAY KIDS#2000-09-14#2018#Group#Male#South Korean#"),
             new Artist("9#EXID#1991-08-12#2012#Group#Female#South Korean#"),
-            new Artist("10#Monsta X#1993-01-26#2015#Group#Male#South Korean#"),
-            new Artist("11#Mamamoo#1991-06-19#2014#Group#Female#South Korean#"),
+            new Artist("10#MONSTA X#1993-01-26#2015#Group#Male#South Korean#"),
+            new Artist("11#MAMAMOO#1991-06-19#2014#Group#Female#South Korean#"),
             new Artist("12#(G)I-DLE#1998-08-14#2018#Group#Female#South Korean#")
             //new Artist("13#ENHYPEN#2002-12-01#2020#Group#Male#South Korean#"),
             //new Artist("14#ATEEZ#1998-10-24#2018#Group#Male#South Korean#"),
@@ -192,14 +192,14 @@ namespace GKKVWT_HFT_2023241.Repository.Database
                 ) ;
 
             modelBuilder.Entity<Label>().HasData(
-            new Label("1#YG Entertainment#3.5 Billion#South Korea#1996-08-08#Yang Hyun-suk#"),
-            new Label("2#Big Hit Entertainment#1 Billion#South Korea#2005-02-01#Bang Si-hyuk#"),
-            new Label("3#SM Entertainment#1.5 Billion#South Korea#1995-02-14#Lee Soo-man#"),
-            new Label("4#JYP Entertainment#2 Billion#South Korea#1997-01-16#Park Jin-young#"),
-            new Label("5#Banana Culture#500 Million#South Korea#2012-08-13#Shinsadong Tiger#"),
-            new Label("6#Starship Entertainment#1 Billion#South Korea#2014-05-14#Kim Shi-dae#"),
-            new Label("7#Rainbow Bridge World#200 Million#South Korea#2014-06-19#Kim Do-hoon#"),
-            new Label("8#Cube Entertainment#120 Million#South Korea#2018-05-02#Hong Seung-sung#")
+            new Label("1#YG ENTERTAINMENT#3.5 Billion#South Korea#1996-08-08#Yang Hyun-suk#"),
+            new Label("2#BIG HIT ENTERTAINMENT#1 Billion#South Korea#2005-02-01#Bang Si-hyuk#"),
+            new Label("3#SM ENTERTAINMENT#1.5 Billion#South Korea#1995-02-14#Lee Soo-man#"),
+            new Label("4#JYP ENTERTAINMENT#2 Billion#South Korea#1997-01-16#Park Jin-young#"),
+            new Label("5#BANANA CULTURE#500 Million#South Korea#2012-08-13#Shinsadong Tiger#"),
+            new Label("6#STARSHIP ENTERTAINMENT#1 Billion#South Korea#2014-05-14#Kim Shi-dae#"),
+            new Label("7#RAINBOW BRIDGE WORLD#200 Million#South Korea#2014-06-19#Kim Do-hoon#"),
+            new Label("8#CUBE ENTERTAINMENT#120 Million#South Korea#2018-05-02#Hong Seung-sung#")
             //new Label("9#Belift Lab#150 Million#South Korea#2020-11-30#Bang Si-hyuk#"),
             //new Label("10#KQ Entertainment#50 Million#South Korea#2018-10-24#Kim Gyu-wook#"),
             //new Label("11#Source Music#20 Million#South Korea#2015-01-15#So Sung-jin#"),

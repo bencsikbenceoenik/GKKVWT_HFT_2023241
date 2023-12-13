@@ -34,12 +34,12 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
         public IEnumerable<Song> GetSongsByDurationAndArtistGender(int durationThreshold, string artistGender)
         {
-            // Retrieve artists with the specified gender
-            var artists = artistRepo.ReadAll().Where(a => a.Gender == artistGender).ToList();
+            //Retrieve artists with the specified gender
+            var artists = artistRepo.ReadAll().Where(a => a.Gender.Equals(artistGender)).ToList();
 
             // Retrieve songs with a duration longer than the threshold by artists with the specified gender
             var songs = songRepo.ReadAll()
-                .Where(s => s.Duration > durationThreshold && artists.Any(a => a.ArtistId == s.ArtistId));
+                .Where(s => s.Duration > durationThreshold).Where(s => artists.Contains(s.Artist));
 
             return songs;
         }
@@ -51,23 +51,21 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
 
             // Retrieve songs released by those artists
             var songs = songRepo.ReadAll()
-                .Where(s => artists.Any(a => a.ArtistId == s.ArtistId));
+                .Where(s => artists.Contains(s.Artist));
 
             return songs;
         }
-        public IEnumerable<Song> GetSongsByLabelWithValueGreaterThan(double thresholdValue, string labelName)
+        public IEnumerable<Song> GetSongsByLabelValueGreaterThan(double thresholdValue)
         {
             // Retrieve the label by name
-            var label = labelRepo.ReadAll().FirstOrDefault(l => l.LabelName == labelName);
-
-            if (label == null)
+            var labels = labelRepo.ReadAll().Where(l => l.LabelValue > thresholdValue).ToList();
+            if (labels == null)
             {
-                throw new ArgumentNullException($"Label with name '{labelName}' not found.");
+                throw new ArgumentNullException($"Label with LabelValue over {thresholdValue} not found.");
             }
-
-            // Retrieve songs from the specified label with a label value greater than the threshold
+            // Retrieve songs from labels with label value greater than the threshold
             var songs = songRepo.ReadAll()
-                .Where(s => s.LabelId == label.LabelId && label.LabelValue > thresholdValue);
+               .Where(s => labels.Contains(s.Label));
 
             return songs;
         }
@@ -75,30 +73,30 @@ namespace GKKVWT_HFT_2023241.Logic.Classes
         public IEnumerable<Song> GetSongsReleasedAfterYearByNationality(int releaseYear, string nationality)
         {
             // Retrieve artists by nationality
-            var artists = artistRepo.ReadAll().Where(a => a.Nationality == nationality).ToList();
+            var artists = artistRepo.ReadAll().Where(a => a.Nationality.Equals(nationality)).ToList();
 
             // Retrieve songs released after a certain year by artists of the specified nationality
             var songs = songRepo.ReadAll()
-                .Where(s => s.ReleaseDate.Year > releaseYear && artists.Any(a => a.ArtistId == s.ArtistId));
+                .Where(s => s.ReleaseDate.Year > releaseYear).Where(s => artists.Contains(s.Artist));
 
             return songs;
         }
         public IEnumerable<Song> GetSongsByArtistAndLabel(string artistName, string labelName)
         {
             // Retrieve the artist by name
-            var artist = artistRepo.ReadAll().FirstOrDefault(a => a.ArtistName == artistName);
+            var artist = artistRepo.ReadAll().FirstOrDefault(a => a.ArtistName == artistName.ToUpper());
 
             if (artist == null)
             {
-                throw new ArgumentException($"Artist with name '{artistName}' not found.");
+                throw new ArgumentException($"Artist with name '{artistName.ToUpper()}' not found.");
             }
 
             // Retrieve the label by name
-            var label = labelRepo.ReadAll().FirstOrDefault(l => l.LabelName == labelName);
+            var label = labelRepo.ReadAll().FirstOrDefault(l => l.LabelName == labelName.ToUpper());
 
             if (label == null)
             {
-                throw new ArgumentException($"Label with name '{labelName}' not found.");
+                throw new ArgumentException($"Label with name '{labelName.ToUpper()}' not found.");
             }
 
             // Retrieve songs by artist and label

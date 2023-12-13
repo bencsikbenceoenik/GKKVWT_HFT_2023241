@@ -80,7 +80,7 @@ namespace GKKVWT_HFT_2023241.Client
                     Console.Write("Enter Song's id to update: ");
                     int songId = int.Parse(Console.ReadLine());
                     Song songOne = rest.Get<Song>(songId, "song");
-                    Console.Write($"New name [old: {songOne.SongId}]: ");
+                    Console.Write($"New name [old: {songOne.SongTitle}]: ");
                     string songName = Console.ReadLine();
                     songOne.SongTitle = songName;
                     rest.Put(songOne, "song");
@@ -121,68 +121,65 @@ namespace GKKVWT_HFT_2023241.Client
         }
         static void GetSongsByDurationAndArtistGender()
         {
-
+            Console.WriteLine("Enter Duration minimum threshold in seconds: (pl:220)");
+            string threshold = Console.ReadLine();
+            Console.WriteLine("Enter Artist gender: (pl: Female)");
+            string gender = Console.ReadLine();
+            Console.WriteLine();
+            rest.Get<Song>($"/Stat/GetSongsByDurationAndArtistGender?durationThreshold={threshold}&artistGender={gender}").ForEach(s => { Console.WriteLine($"{s.SongTitle}"); });
+            Console.ReadLine();
         }
 
         static void GetSongsByArtistsDebutedAfterYear()
         {
-
+            Console.WriteLine("Enter Debut year minimum threshold: (pl:2016)");
+            string year = Console.ReadLine();
+            Console.WriteLine();
+            rest.Get<Song>($"/Stat/GetSongsByArtistsDebutedAfterYear?debutYearThreshold={year}").ForEach(s => { Console.WriteLine($"{s.SongTitle}"); });
+            Console.ReadLine();
         }
 
-        static void GetSongsByLabelWithValueGreaterThan()
+        static void GetSongsByLabelValueGreaterThan()
         {
-
+            Console.WriteLine("Enter LabelValue minimum threshold: (pl:2000000000)");
+            string threshold = Console.ReadLine();
+            Console.WriteLine();
+            rest.Get<Song>($"/Stat/GetSongsByLabelValueGreaterThan?thresholdValue={threshold}").ForEach(s => { Console.WriteLine($"{s.SongTitle}"); });
+            Console.ReadLine();
         }
 
         static void GetSongsReleasedAfterYearByNationality()
         {
-
+            Console.WriteLine("Enter Released year minimum threshold: (pl:2020)");
+            string year = Console.ReadLine();
+            Console.WriteLine("Enter Artist nationality: (pl:South Korean)");
+            string nationality = Console.ReadLine();
+            Console.WriteLine();
+            rest.Get<Song>($"/Stat/GetSongsReleasedAfterYearByNationality?releaseYear={year}&nationality={nationality}").ForEach(s => { Console.WriteLine($"{s.SongTitle}"); });
+            Console.ReadLine();
         }
 
         static void GetSongsByArtistAndLabel()
         {
-
+            Console.WriteLine("Enter Artist name: (pl: blackpink)");
+            string artist = Console.ReadLine();
+            Console.WriteLine("Enter Label name: (pl: yg entertainment)");
+            string label = Console.ReadLine();
+            Console.WriteLine();
+            rest.Get<Song>($"/Stat/GetSongsByArtistAndLabel?artistName={artist}&labelName={label}").ForEach(s => { Console.WriteLine($"{s.SongTitle}"); });
+            Console.ReadLine();
         }
         static void Main(string[] args)
         {
+
             rest = new RestService("http://localhost:40338/", "song");
-
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:40338/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue
-                ("application/json"));
-            try
-            {
-                client.GetAsync("").GetAwaiter().GetResult();
-            }
-            catch (HttpRequestException)
-            {
-                throw new ArgumentException("Endpoint is not available!");
-            }
-            try
-            {
-                HttpResponseMessage response = client.GetAsync("label" + "/" + 1.ToString()).GetAwaiter().GetResult();
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-            }
-            //GetSongsByDurationAndArtistGender
-            //GetSongsByArtistsDebutedAfterYear
-            //GetSongsByLabelWithValueGreaterThan
-            //GetSongsReleasedAfterYearByNationality
-            //GetSongsByArtistAndLabel
             var songSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("GetSongsReleasedAfterYearByNationality", () => GetSongsReleasedAfterYearByNationality())
+                .Add("GetSongsByDurationAndArtistGender", () => GetSongsByDurationAndArtistGender())
+                .Add("GetSongsByArtistsDebutedAfterYear", () => GetSongsByArtistsDebutedAfterYear())
+                .Add("GetSongsByLabelValueGreaterThan", () => GetSongsByLabelValueGreaterThan())
+                .Add("GetSongsByArtistAndLabel", () => GetSongsByArtistAndLabel())
                 .Add("List", () => List("Song"))
-                .Add("GetSongsByDurationAndArtistGender", () => List("Song"))
-                .Add("GetSongsByArtistsDebutedAfterYear", () => List("Song"))
-                .Add("GetSongsByLabelWithValueGreaterThan", () => List("Song"))
-                .Add("GetSongsReleasedAfterYearByNationality", () => List("Song"))
-                .Add("GetSongsByArtistAndLabel", () => List("Song"))
                 .Add("Create", () => Create("Song"))
                 .Add("Delete", () => Delete("Song"))
                 .Add("Update", () => Update("Song"))

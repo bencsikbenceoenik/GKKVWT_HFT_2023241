@@ -22,7 +22,6 @@ namespace GKKVWT_HFT_2023241.Models
         public string Language { get; set; }/*if it has more than one than it will be "mixed"*/
         //Foreign key
         public int ArtistId { get; set; }
-        [JsonIgnore]
         public virtual Artist Artist { get; set; }
         //Foreign key
         public int LabelId { get; set; }

@@ -1,44 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GKKVWT_HFT_2023241.Logic.Interfaces;
+using GKKVWT_HFT_2023241.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GKKVWT_HFT_2023241.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class StatController : ControllerBase
     {
-        // GET: api/<StatController>
+        ISongLogic logic;
+
+        public StatController(ISongLogic logic)
+        {
+            this.logic = logic;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Song> GetSongsByDurationAndArtistGender(int durationThreshold, string artistGender)
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.GetSongsByDurationAndArtistGender(durationThreshold, artistGender);
         }
 
-        // GET api/<StatController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public IEnumerable<Song> GetSongsByArtistsDebutedAfterYear(int debutYearThreshold)
         {
-            return "value";
+            return this.logic.GetSongsByArtistsDebutedAfterYear(debutYearThreshold);
         }
-
-        // POST api/<StatController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet]
+        public IEnumerable<Song> GetSongsByLabelValueGreaterThan(double thresholdValue)
         {
+            return this.logic.GetSongsByLabelValueGreaterThan(thresholdValue);
         }
-
-        // PUT api/<StatController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet]
+        public IEnumerable<Song> GetSongsReleasedAfterYearByNationality(int releaseYear, string nationality)
         {
+            return this.logic.GetSongsReleasedAfterYearByNationality(releaseYear, nationality);
         }
-
-        // DELETE api/<StatController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet]
+        public IEnumerable<Song> GetSongsByArtistAndLabel(string artistName, string labelName)
         {
+            return this.logic.GetSongsByArtistAndLabel(artistName, labelName);
         }
     }
 }

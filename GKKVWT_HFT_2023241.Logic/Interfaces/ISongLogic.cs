@@ -16,7 +16,7 @@ namespace GKKVWT_HFT_2023241.Logic.Interfaces
         void Update(Song item);
         IEnumerable<Song> GetSongsByDurationAndArtistGender(int durationThreshold, string artistGender);
         IEnumerable<Song> GetSongsByArtistsDebutedAfterYear(int debutYearThreshold);
-        IEnumerable<Song> GetSongsByLabelWithValueGreaterThan(double thresholdValue, string labelName);
+        IEnumerable<Song> GetSongsByLabelValueGreaterThan(double thresholdValue);
         IEnumerable<Song> GetSongsReleasedAfterYearByNationality(int releaseYear, string nationality);
         IEnumerable<Song> GetSongsByArtistAndLabel(string artistName, string labelName);
     }
