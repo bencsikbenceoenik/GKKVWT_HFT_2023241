@@ -1,0 +1,1 @@
+C# console and web api project creating a database with code first style and handling it allowing to send crud and non-crud method calls this can be done using the base console or with browser using web api.
