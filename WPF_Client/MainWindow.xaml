@@ -63,6 +63,9 @@
             <TextBox Padding="10"/>
             <Label Content="Name" Background="LightBlue" Padding="10"/>
             <TextBox Padding="10"/>
+            <Button Content="ADD" Padding="10" Margin="10"/>
+            <Button Content="UPDATE" Padding="10" Margin="10"/>
+            <Button Content="DELETE" Padding="10" Margin="10"/>
         </StackPanel>
 
     </Grid>
