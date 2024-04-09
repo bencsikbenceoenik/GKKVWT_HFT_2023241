@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1100">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" Name="ltb" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding ArtistId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                        <Label Content="{Binding ArtistName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
+                        <Label Content="{Binding Age}" Grid.Column="2" ContentStringFormat="Age: {0}"/>
+                        <Label Content="{Binding DebutYear}" Grid.Column="3" ContentStringFormat="DebutYear: {0}"/>
+                        <Label Content="{Binding Type}" Grid.Column="4" ContentStringFormat="Type: {0}"/>
+                        <Label Content="{Binding Gender}" Grid.Column="5" ContentStringFormat="Gender: {0}"/>
+                        <Label Content="{Binding Nationality}" Grid.Column="6" ContentStringFormat="Nationality: {0}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>
