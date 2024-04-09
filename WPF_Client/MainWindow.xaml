@@ -15,30 +15,55 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" SelectedItem="{Binding SelectedArtist}" Name="ltb" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding ArtistId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
-                        <Label Content="{Binding ArtistName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
-                        <Label Content="{Binding Age}" Grid.Column="2" ContentStringFormat="Age: {0}"/>
-                        <Label Content="{Binding DebutYear}" Grid.Column="3" ContentStringFormat="DebutYear: {0}"/>
-                        <Label Content="{Binding Type}" Grid.Column="4" ContentStringFormat="Type: {0}"/>
-                        <Label Content="{Binding Gender}" Grid.Column="5" ContentStringFormat="Gender: {0}"/>
-                        <Label Content="{Binding Nationality}" Grid.Column="6" ContentStringFormat="Nationality: {0}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="12*" />
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Artists" />
+                <Button Grid.Column="1" Content="Songs" />
+                <Button Grid.Column="2" Content="Labels" />
+                <Button  Grid.Column="3" Content="Noncrud" />
+            </Grid>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" Name="ltb" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding ArtistId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                            <Label Content="{Binding ArtistName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
+                            <Label Content="{Binding Age}" Grid.Column="2" ContentStringFormat="Age: {0}"/>
+                            <Label Content="{Binding DebutYear}" Grid.Column="3" ContentStringFormat="DebutYear: {0}"/>
+                            <Label Content="{Binding Type}" Grid.Column="4" ContentStringFormat="Type: {0}"/>
+                            <Label Content="{Binding Gender}" Grid.Column="5" ContentStringFormat="Gender: {0}"/>
+                            <Label Content="{Binding Nationality}" Grid.Column="6" ContentStringFormat="Nationality: {0}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </Grid>
+        <StackPanel Grid.Column="1">
+            <Label Content="ID" Background="LightBlue" Padding="10"/>
+            <TextBox Padding="10"/>
+            <Label Content="Name" Background="LightBlue" Padding="10"/>
+            <TextBox Padding="10"/>
+        </StackPanel>
 
     </Grid>
 </Window>
