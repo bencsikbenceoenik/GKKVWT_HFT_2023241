@@ -1,3 +1,4 @@
+using GKKVWT_HFT_2023241.Endpoint.Services;
 using GKKVWT_HFT_2023241.Logic.Classes;
 using GKKVWT_HFT_2023241.Logic.Interfaces;
 using GKKVWT_HFT_2023241.Models;
@@ -43,7 +44,7 @@ namespace GKKVWT_HFT_2023241.Endpoint
             services.AddTransient<IArtistLogic, ArtistLogic>();
             services.AddTransient<ISongLogic, SongLogic>();
             services.AddTransient<ILabelLogic, LabelLogic>();
-
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -77,6 +78,7 @@ namespace GKKVWT_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
