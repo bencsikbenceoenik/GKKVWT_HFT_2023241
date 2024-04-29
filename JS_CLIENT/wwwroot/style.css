@@ -1,2 +1,29 @@
-﻿body {
+﻿table, th, td {
+    border: 1px solid black;
+    margin: 5px;
+}
+
+th, tr {
+    text-align: center;
+    padding: 8px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#formdiv{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#formdiv label,input,button{
+    margin: 10px;
+    padding: 7px;
+}
+
+#formdiv label{
+    font-weight: bolder;
 }

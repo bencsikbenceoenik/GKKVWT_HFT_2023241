@@ -6,8 +6,33 @@
     <title>Artist UI</title>
 </head>
 <body>
-    <h1>Kpop artist database</h1>
+    <h1>Artist Catalog</h1>
 
+    <div id="formdiv">
+        <label>Artist Name</label>
+        <input type="text" id="artistname" />
+        <button type="button" onclick="create()">Create</button>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Age</th>
+                <th>Name</th>
+                <th>DebutYear</th>
+                <th>Gender</th>
+                <th>Nationality</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
 
     <script src="script.js"></script>
 </body>
