@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WPF_Client.Updatewindows;
 
 namespace WPF_Client.ViewModels
 {
@@ -35,11 +36,11 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedArtist = new Artist()
-                    {
-                        ArtistName = value.ArtistName,
-                        ArtistId = value.ArtistId
-                    };
+                    selectedArtist = value;
+                    //{
+                    //    ArtistName = value.ArtistName,
+                    //    ArtistId = value.ArtistId
+                    //};
                     OnPropertyChanged();
                     (DeleteArtistCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -63,11 +64,11 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedSong = new Song()
-                    {
-                        SongTitle = value.SongTitle,
-                        SongId = value.SongId
-                    };
+                    selectedSong = value;
+                    //{
+                    //    SongTitle = value.SongTitle,
+                    //    SongId = value.SongId
+                    //};
                     OnPropertyChanged();
                     (DeleteSongCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -91,11 +92,11 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedLabel = new Label()
-                    {
-                        LabelName = value.LabelName,
-                        LabelId = value.LabelId
-                    };
+                    selectedLabel = value;
+                    //{
+                    //    LabelName = value.LabelName,
+                    //    LabelId = value.LabelId
+                    //};
                     OnPropertyChanged();
                     (DeleteLabelCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -135,7 +136,17 @@ namespace WPF_Client.ViewModels
                 {
                     try
                     {
-                        Artists.Update(SelectedArtist);
+                        ArtistUpdateWindow artistUpdate = new ArtistUpdateWindow(SelectedArtist);
+                        if (artistUpdate.ShowDialog() == true)
+                        {
+                            SelectedArtist = artistUpdate.SelectedArtist;
+                            Artists.Update(SelectedArtist);
+                        }
+                        else
+                        {
+                            Artists.Update(SelectedArtist);
+                        }
+                        
                     }
                     catch (ArgumentException ex)
                     {
@@ -170,6 +181,8 @@ namespace WPF_Client.ViewModels
                 {
                     try
                     {
+                        SongUpdateWindow songUpdate = new SongUpdateWindow();
+                        songUpdate.ShowDialog();
                         Songs.Update(SelectedSong);
                     }
                     catch (ArgumentException ex)
@@ -192,12 +205,13 @@ namespace WPF_Client.ViewModels
 
                 #region Label
 
-                Artists = new RestCollection<Artist>("http://localhost:40338/", "label", "hub");
+                Labels = new RestCollection<Label>("http://localhost:40338/", "label", "hub");
                 CreateLabelCommand = new RelayCommand(() =>
                 {
                     Labels.Add(new Label()
                     {
-                        LabelName = SelectedLabel.LabelName
+                        LabelName = SelectedLabel.LabelName,
+                        FoundmentDate = DateTime.Now
                     });
                 });
 
@@ -205,6 +219,11 @@ namespace WPF_Client.ViewModels
                 {
                     try
                     {
+                        LabelUpdateWindow labelUpdate = new LabelUpdateWindow();
+                        if (labelUpdate.ShowDialog() == true)
+                        {
+
+                        }
                         Labels.Update(SelectedLabel);
                     }
                     catch (ArgumentException ex)

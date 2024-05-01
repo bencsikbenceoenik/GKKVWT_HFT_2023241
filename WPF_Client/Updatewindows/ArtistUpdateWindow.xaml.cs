@@ -11,24 +11,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_Client
+namespace WPF_Client.Updatewindows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ArtistUpdateWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArtistUpdateWindow : Window
     {
-        public MainWindow()
+        public Artist SelectedArtist { get; set; }
+        public ArtistUpdateWindow(Artist selectedArtist)
         {
+            SelectedArtist = selectedArtist;
+            DataContext = selectedArtist;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.DialogResult = true;
         }
     }
 }

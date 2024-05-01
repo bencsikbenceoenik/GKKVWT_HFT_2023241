@@ -11,62 +11,144 @@
         <ViewModel:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="12*" />
-            </Grid.RowDefinitions>
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Artists" />
-                <Button Grid.Column="1" Content="Songs" />
-                <Button Grid.Column="2" Content="Labels" />
-                <Button  Grid.Column="3" Content="Noncrud" />
-            </Grid>
-            <ListBox Grid.Row="1" ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" Name="ltb" HorizontalContentAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Content="{Binding ArtistId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
-                            <Label Content="{Binding ArtistName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
-                            <Label Content="{Binding Age}" Grid.Column="2" ContentStringFormat="Age: {0}"/>
-                            <Label Content="{Binding DebutYear}" Grid.Column="3" ContentStringFormat="DebutYear: {0}"/>
-                            <Label Content="{Binding Type}" Grid.Column="4" ContentStringFormat="Type: {0}"/>
-                            <Label Content="{Binding Gender}" Grid.Column="5" ContentStringFormat="Gender: {0}"/>
-                            <Label Content="{Binding Nationality}" Grid.Column="6" ContentStringFormat="Nationality: {0}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            
-        </Grid>
-        <StackPanel Grid.Column="1">
-            <Label Content="ID" Background="LightBlue" Padding="10"/>
-            <TextBox Padding="10"/>
-            <Label Content="Name" Background="LightBlue" Padding="10"/>
-            <TextBox Padding="10"/>
-            <Button Content="ADD" Padding="10" Margin="10"/>
-            <Button Content="UPDATE" Padding="10" Margin="10"/>
-            <Button Content="DELETE" Padding="10" Margin="10"/>
-        </StackPanel>
-
+        <TabControl>
+            <TabItem Header="Artists">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0" ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding ArtistId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                                    <Label Content="{Binding ArtistName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
+                                    <Label Content="{Binding Age}" Grid.Column="2" ContentStringFormat="Age: {0}"/>
+                                    <Label Content="{Binding DebutYear}" Grid.Column="3" ContentStringFormat="DebutYear: {0}"/>
+                                    <Label Content="{Binding Type}" Grid.Column="4" ContentStringFormat="Type: {0}"/>
+                                    <Label Content="{Binding Gender}" Grid.Column="5" ContentStringFormat="Gender: {0}"/>
+                                    <Label Content="{Binding Nationality}" Grid.Column="6" ContentStringFormat="Nationality: {0}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Padding="10" Content="Name" Background="LightBlue"/>
+                        <TextBox Padding="10" Text="{Binding SelectedArtist.ArtistName}" Margin="0,0,0,30"/>
+                        <Button Padding="10" Margin="10" Content="Add" Command="{Binding CreateArtistCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Update" Command="{Binding UpdateArtistCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Delete" Command="{Binding DeleteArtistCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Close" Click="Button_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Labels">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0" ItemsSource="{Binding Labels}" SelectedItem="{Binding SelectedLabel}" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding LabelId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                                    <Label Content="{Binding LabelName}" Grid.Column="1" ContentStringFormat="Name: {0}"/>
+                                    <Label Content="{Binding LabelValue}" Grid.Column="2" ContentStringFormat="Value: {0}"/>
+                                    <Label Content="{Binding Founder}" Grid.Column="3" ContentStringFormat="Founder: {0}"/>
+                                    <Label Content="{Binding FoundmentDate}" Grid.Column="4" ContentStringFormat="FoundmentDate: {0}"/>
+                                    <Label Content="{Binding BasedIn}" Grid.Column="5" ContentStringFormat="BasedIn: {0}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Padding="10" Content="Name" Background="LightBlue"/>
+                        <TextBox Padding="10" Text="{Binding SelectedLabel.LabelName}" Margin="0,0,0,30"/>
+                        <Button Padding="10" Margin="10" Content="Add" Command="{Binding CreateLabelCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Update" Command="{Binding UpdateLabelCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Delete" Command="{Binding DeleteLabelCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Close" Click="Button_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Songs" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding SongId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                                    <Label Content="{Binding SongTitle}" Grid.Column="1" ContentStringFormat="Title: {0}"/>
+                                    <Label Content="{Binding SongType}" Grid.Column="2" ContentStringFormat="Type: {0}"/>
+                                    <Label Content="{Binding ReleaseDate}" Grid.Column="3" ContentStringFormat="ReleaseDate: {0}"/>
+                                    <Label Content="{Binding Duration}" Grid.Column="4" ContentStringFormat="Duration: {0}"/>
+                                    <Label Content="{Binding Language}" Grid.Column="5" ContentStringFormat="Language: {0}"/>
+                                    <Label Content="{Binding Artist.ArtistName}" Grid.Column="6" ContentStringFormat="Artist: {0}"/>
+                                    <Label Content="{Binding Label.LabelName}" Grid.Column="7" ContentStringFormat="Label: {0}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Padding="10" Content="Name" Background="LightBlue"/>
+                        <TextBox Padding="10" />
+                        <Button Padding="10" Margin="10" Content="Add" Command="{Binding CreateSongCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Update" Command="{Binding UpdateSongCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Delete" Command="{Binding DeleteSongCommand}"/>
+                        <Button Padding="10" Margin="10" Content="Close" Click="Button_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Noncrud" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0"></ListBox>
+                    <StackPanel Grid.Column="1">
+                        <Label Padding="10" Content="Name" Background="LightBlue"/>
+                        <TextBox Padding="10" />
+                        <Button Padding="10" Margin="10" Content="Add"/>
+                        <Button Padding="10" Margin="10" Content="Update"/>
+                        <Button Padding="10" Margin="10" Content="Delete"/>
+                        <Button Padding="10" Margin="10" Content="Close"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

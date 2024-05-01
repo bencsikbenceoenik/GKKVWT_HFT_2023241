@@ -1,5 +1,4 @@
-﻿using GKKVWT_HFT_2023241.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_Client
+namespace WPF_Client.Updatewindows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LabelUpdateWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LabelUpdateWindow : Window
     {
-        public MainWindow()
+        public LabelUpdateWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }
