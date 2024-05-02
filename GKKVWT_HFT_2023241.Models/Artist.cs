@@ -33,8 +33,9 @@ namespace GKKVWT_HFT_2023241.Models
         {
             this.ArtistId = int.Parse(input.Split('#')[0]);
             this.ArtistName = input.Split('#')[1];
+            //this.Type = input.Split('#')[4];
             this.Type = (ArtistType)Enum.Parse(typeof(ArtistType), input.Split('#')[4]);
-            if (Type == ArtistType.Group)
+            if (Type == ArtistType.Group/*Type == "Group"*/)
             {
                 this.Age = 0;
             }

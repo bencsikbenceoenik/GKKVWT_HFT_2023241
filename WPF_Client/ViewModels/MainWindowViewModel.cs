@@ -36,11 +36,18 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedArtist = value;
-                    //{
-                    //    ArtistName = value.ArtistName,
-                    //    ArtistId = value.ArtistId
-                    //};
+                    selectedArtist = new Artist()
+                    {
+                        ArtistName = value.ArtistName,
+                        ArtistId = value.ArtistId,
+                        Age = value.Age,
+                        DebutYear = value.DebutYear,
+                        Gender = value.Gender,
+                        Nationality = value.Nationality,
+                        Songs = value.Songs,
+                        Type = value.Type
+                    };
+                    //SetProperty(ref selectedArtist, value);
                     OnPropertyChanged();
                     (DeleteArtistCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -64,11 +71,20 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedSong = value;
-                    //{
-                    //    SongTitle = value.SongTitle,
-                    //    SongId = value.SongId
-                    //};
+                    selectedSong = new Song()
+                    {
+                        SongTitle = value.SongTitle,
+                        SongId = value.SongId,
+                        SongType = value.SongType,
+                        Artist = value.Artist,
+                        ArtistId = value.ArtistId,
+                        Duration = value.Duration,
+                        Label = value.Label,
+                        LabelId = value.LabelId,
+                        Language = value.Language,
+                        ReleaseDate = value.ReleaseDate
+                    };
+                    //SetProperty(ref selectedSong, value);
                     OnPropertyChanged();
                     (DeleteSongCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -92,11 +108,17 @@ namespace WPF_Client.ViewModels
             {
                 if (value != null)
                 {
-                    selectedLabel = value;
-                    //{
-                    //    LabelName = value.LabelName,
-                    //    LabelId = value.LabelId
-                    //};
+                    selectedLabel = new Label()
+                    {
+                        LabelName = value.LabelName,
+                        LabelId = value.LabelId,
+                        BasedIn = value.BasedIn,
+                        Founder = value.Founder,
+                        FoundmentDate = value.FoundmentDate,
+                        LabelValue = value.LabelValue,
+                        Songs = value.Songs,
+                    };
+                    //SetProperty(ref selectedLabel, value);
                     OnPropertyChanged();
                     (DeleteLabelCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
@@ -118,7 +140,7 @@ namespace WPF_Client.ViewModels
         }
 
         public MainWindowViewModel()
-        {
+        { 
             if (!IsInDesignMode)
             {
                 #region Artist
@@ -142,10 +164,6 @@ namespace WPF_Client.ViewModels
                             SelectedArtist = artistUpdate.SelectedArtist;
                             Artists.Update(SelectedArtist);
                         }
-                        else
-                        {
-                            Artists.Update(SelectedArtist);
-                        }
                         
                     }
                     catch (ArgumentException ex)
@@ -153,7 +171,6 @@ namespace WPF_Client.ViewModels
                         ErrorMessage = ex.Message;
                     }
                 });
-
                 DeleteArtistCommand = new RelayCommand(() =>
                 {
                     Artists.Delete(SelectedArtist.ArtistId);
@@ -162,7 +179,7 @@ namespace WPF_Client.ViewModels
                 {
                     return SelectedArtist != null;
                 });
-                SelectedArtist = new Artist();
+                //SelectedArtist = new Artist();
 
                 #endregion
 
@@ -182,8 +199,11 @@ namespace WPF_Client.ViewModels
                     try
                     {
                         SongUpdateWindow songUpdate = new SongUpdateWindow(SelectedSong);
-                        songUpdate.ShowDialog();
-                        Songs.Update(SelectedSong);
+                        if (songUpdate.ShowDialog() == true)
+                        {
+                            SelectedSong = songUpdate.SelectedSong;
+                            Artists.Update(SelectedArtist);
+                        }
                     }
                     catch (ArgumentException ex)
                     {
@@ -199,7 +219,7 @@ namespace WPF_Client.ViewModels
                 {
                     return SelectedSong != null;
                 });
-                SelectedSong = new Song();
+                //SelectedSong = new Song();
 
                 #endregion
 
@@ -219,12 +239,12 @@ namespace WPF_Client.ViewModels
                 {
                     try
                     {
-                        LabelUpdateWindow labelUpdate = new LabelUpdateWindow();
+                        LabelUpdateWindow labelUpdate = new LabelUpdateWindow(SelectedLabel);
                         if (labelUpdate.ShowDialog() == true)
                         {
-
+                            SelectedLabel = labelUpdate.SelectedLabel;
+                            Labels.Update(SelectedLabel);
                         }
-                        Labels.Update(SelectedLabel);
                     }
                     catch (ArgumentException ex)
                     {
@@ -240,7 +260,7 @@ namespace WPF_Client.ViewModels
                 {
                     return SelectedLabel != null;
                 });
-                SelectedLabel = new Label();
+                //SelectedLabel = new Label();
 
                 #endregion
 

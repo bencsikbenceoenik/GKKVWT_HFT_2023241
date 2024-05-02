@@ -8,17 +8,17 @@
         Title="LabelUpdateWindow" Height="450" Width="800">
     <StackPanel HorizontalAlignment="Stretch">
         <Label Padding="5" Content="ID" Background="LightBlue"/>
-        <TextBox Padding="5"/>
+        <TextBox Padding="5" Text="{Binding LabelId}"/>
         <Label Padding="5" Content="Name" Background="LightBlue"/>
-        <TextBox Padding="5"/>
+        <TextBox Padding="5" Text="{Binding LabelName}"/>
         <Label Padding="5" Content="Value" Background="LightBlue"/>
-        <TextBox Padding="5"/>
+        <TextBox Padding="5" Text="{Binding LabelValue}"/>
         <Label Padding="5" Content="BasedIn" Background="LightBlue"/>
-        <TextBox Padding="5"/>
+        <TextBox Padding="5" Text="{Binding BasedIn}"/>
         <Label Padding="5" Content="FoundmentDate" Background="LightBlue"/>
-        <TextBox Padding="5"/>
+        <TextBox Padding="5" Text="{Binding FoundmentDate}"/>
         <Label Padding="5" Content="Founder" Background="LightBlue"/>
-        <TextBox Padding="5"/>
-        <Button Padding="10" Content="Update"/>
+        <TextBox Padding="5" Text="{Binding Founder}"/>
+        <Button Padding="10" Content="Update" Click="Button_Click"/>
     </StackPanel>
 </Window>
