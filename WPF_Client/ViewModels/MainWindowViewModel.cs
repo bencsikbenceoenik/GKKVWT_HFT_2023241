@@ -181,7 +181,7 @@ namespace WPF_Client.ViewModels
                 {
                     try
                     {
-                        SongUpdateWindow songUpdate = new SongUpdateWindow();
+                        SongUpdateWindow songUpdate = new SongUpdateWindow(SelectedSong);
                         songUpdate.ShowDialog();
                         Songs.Update(SelectedSong);
                     }

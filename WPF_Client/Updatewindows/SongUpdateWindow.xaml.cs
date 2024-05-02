@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GKKVWT_HFT_2023241.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace WPF_Client.Updatewindows
     /// </summary>
     public partial class SongUpdateWindow : Window
     {
-        public SongUpdateWindow()
+        public Song SelectedSong { get; set; }
+        public SongUpdateWindow(Song selectedsong)
         {
+            SelectedSong = selectedsong;
             InitializeComponent();
         }
     }

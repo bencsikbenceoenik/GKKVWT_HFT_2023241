@@ -15,9 +15,9 @@
         <TextBox Text="{Binding Age}" Padding="5"/>
         <Label Content="DebutYear" Padding="5" Background="LightBlue"/>
         <TextBox Text="{Binding DebutYear}" Padding="5"/>
-        <Label Content="Gender" Padding="5" Background="LightBlue"/>
-        <TextBox Text="{Binding Type}" Padding="5"/>
         <Label Content="Type" Padding="5" Background="LightBlue"/>
+        <TextBox Text="{Binding Type}" Padding="5"/>
+        <Label Content="Gender" Padding="5" Background="LightBlue"/>
         <TextBox Text="{Binding Gender}" Padding="5"/>
         <Label Content="Nationality" Padding="5" Background="LightBlue"/>
         <TextBox Text="{Binding Nationality}" Padding="5" />
