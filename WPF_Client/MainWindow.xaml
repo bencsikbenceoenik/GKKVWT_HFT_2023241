@@ -124,7 +124,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Padding="10" Content="Name" Background="LightBlue"/>
-                        <TextBox Padding="10" />
+                        <TextBox Padding="10" Text="{Binding SelectedSong.SongTitle}"/>
                         <Button Padding="10" Margin="10" Content="Add" Command="{Binding CreateSongCommand}"/>
                         <Button Padding="10" Margin="10" Content="Update" Command="{Binding UpdateSongCommand}"/>
                         <Button Padding="10" Margin="10" Content="Delete" Command="{Binding DeleteSongCommand}"/>
@@ -138,14 +138,40 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Grid.Column="0"></ListBox>
+                    <ListBox Grid.Column="0" ItemsSource="{Binding NonCrud}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding SongId}" Grid.Column="0" ContentStringFormat="ID: {0}"/>
+                                    <Label Content="{Binding SongTitle}" Grid.Column="1" ContentStringFormat="Title: {0}"/>
+                                    <Label Content="{Binding SongType}" Grid.Column="2" ContentStringFormat="Type: {0}"/>
+                                    <Label Content="{Binding ReleaseDate}" Grid.Column="3" ContentStringFormat="ReleaseDate: {0}"/>
+                                    <Label Content="{Binding Duration}" Grid.Column="4" ContentStringFormat="Duration: {0}"/>
+                                    <Label Content="{Binding Language}" Grid.Column="5" ContentStringFormat="Language: {0}"/>
+                                    <Label Content="{Binding Artist.ArtistName}" Grid.Column="6" ContentStringFormat="Artist: {0}"/>
+                                    <Label Content="{Binding Label.LabelName}" Grid.Column="7" ContentStringFormat="Label: {0}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Padding="10" Content="Name" Background="LightBlue"/>
                         <TextBox Padding="10" />
-                        <Button Padding="10" Margin="10" Content="Add"/>
-                        <Button Padding="10" Margin="10" Content="Update"/>
-                        <Button Padding="10" Margin="10" Content="Delete"/>
-                        <Button Padding="10" Margin="10" Content="Close"/>
+                        <Button Padding="10" Margin="10" Content="NonCrud1" Command="{Binding nonCrud1}"/>
+                        <Button Padding="10" Margin="10" Content="NonCrud2" Command="{Binding nonCrud2}"/>
+                        <Button Padding="10" Margin="10" Content="NonCrud3" Command="{Binding nonCrud3}"/>
+                        <Button Padding="10" Margin="10" Content="NonCrud4" Command="{Binding nonCrud4}"/>
+                        <Button Padding="10" Margin="10" Content="NonCrud5" Command="{Binding nonCrud5}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

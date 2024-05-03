@@ -280,7 +280,7 @@ namespace WPF_Client
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         NotifyService notify;
-        RestService rest;
+        public RestService rest { get; private set; }
         List<T> items;
         bool hasSignalR;
         Type type = typeof(T);

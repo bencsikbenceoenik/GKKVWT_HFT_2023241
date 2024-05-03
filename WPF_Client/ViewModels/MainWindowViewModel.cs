@@ -3,9 +3,11 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -130,6 +132,55 @@ namespace WPF_Client.ViewModels
 
         #endregion
 
+        #region Label
+        //public ObservableCollection<Song> noncrud { get; set; }
+
+        private ObservableCollection<Song> nonCrud;
+
+        public ObservableCollection<Song> NonCrud
+        {
+            get { return nonCrud; }
+            set { SetProperty(ref nonCrud, value); }
+        }
+
+
+        //private Song selectedNoncrud;
+
+        //public Song SelectedNoncrud
+        //{
+        //    get { return selectedNoncrud; }
+        //    set
+        //    {
+        //        if (value != null)
+        //        {
+        //            selectedNoncrud = new Song()
+        //            {
+        //                SongTitle = value.SongTitle,
+        //                SongId = value.SongId,
+        //                SongType = value.SongType,
+        //                Artist = value.Artist,
+        //                ArtistId = value.ArtistId,
+        //                Duration = value.Duration,
+        //                Label = value.Label,
+        //                LabelId = value.LabelId,
+        //                Language = value.Language,
+        //                ReleaseDate = value.ReleaseDate
+        //            };
+        //            //SetProperty(ref selectedLabel, value);
+        //            OnPropertyChanged();
+        //            //(DeleteLabelCommand as RelayCommand).NotifyCanExecuteChanged();
+        //        }
+        //    }
+        //}
+        public ICommand nonCrud1 { get; set; }
+        public ICommand nonCrud2 { get; set; }
+        public ICommand nonCrud3 { get; set; }
+        public ICommand nonCrud4 { get; set; }
+        public ICommand nonCrud5 { get; set; }
+
+        #endregion
+
+
         public static bool IsInDesignMode
         {
             get
@@ -171,13 +222,18 @@ namespace WPF_Client.ViewModels
                         ErrorMessage = ex.Message;
                     }
                 });
+                var tempa = (SelectedArtist != null);
+                if (Artists != null && SelectedArtist != null)
+                {
+                    var tempb = Artists.Select(t => t.ArtistId).ToList().Contains(SelectedArtist.ArtistId);
+                }
                 DeleteArtistCommand = new RelayCommand(() =>
                 {
                     Artists.Delete(SelectedArtist.ArtistId);
                 },
                 () =>
                 {
-                    return SelectedArtist != null;
+                    return (SelectedArtist != null && Artists.Select(t => t.ArtistId).ToList().Contains(SelectedArtist.ArtistId));
                 });
                 //SelectedArtist = new Artist();
 
@@ -217,7 +273,7 @@ namespace WPF_Client.ViewModels
                 },
                 () =>
                 {
-                    return SelectedSong != null;
+                    return (SelectedSong != null && Songs.Select(t => t.SongId).ToList().Contains(SelectedSong.SongId));
                 });
                 //SelectedSong = new Song();
 
@@ -258,11 +314,43 @@ namespace WPF_Client.ViewModels
                 },
                 () =>
                 {
-                    return SelectedLabel != null;
+                    return (SelectedLabel != null && Labels.Select(t => t.LabelId).ToList().Contains(SelectedLabel.LabelId));
                 });
                 //SelectedLabel = new Label();
 
                 #endregion
+
+                NonCrud = new ObservableCollection<Song>();
+                nonCrud1 = new RelayCommand(() =>
+                {
+                    NonCrud.Clear();
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByDurationAndArtistGender?durationThreshold={200}&artistGender={"Male"}").ForEach(t => { NonCrud.Add(t); });
+                    OnPropertyChanged();
+                });
+                nonCrud2 = new RelayCommand(() =>
+                {
+                    NonCrud.Clear();
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistsDebutedAfterYear?debutYearThreshold={2018}").ForEach(t => { NonCrud.Add(t); });
+                    OnPropertyChanged();
+                });
+                nonCrud3 = new RelayCommand(() =>
+                {
+                    NonCrud.Clear();
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByLabelValueGreaterThan?thresholdValue={100000000}").ForEach(t => { NonCrud.Add(t); });
+                    OnPropertyChanged();
+                });
+                nonCrud4 = new RelayCommand(() =>
+                {
+                    NonCrud.Clear();
+                    Songs.rest.Get<Song>($"/Stat/GetSongsReleasedAfterYearByNationality?releaseYear={2018}&nationality={"South Korean"}").ForEach(t => { NonCrud.Add(t); });
+                    OnPropertyChanged();
+                });
+                nonCrud5 = new RelayCommand(() =>
+                {
+                    NonCrud.Clear();
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistAndLabel?artistName={"BLACKPINK"}&labelName={"YG ENTERTAINMENT"}").ForEach(t => { NonCrud.Add(t); });
+                    OnPropertyChanged();
+                });
 
             }
         }
