@@ -258,7 +258,7 @@ namespace WPF_Client.ViewModels
                         if (songUpdate.ShowDialog() == true)
                         {
                             SelectedSong = songUpdate.SelectedSong;
-                            Artists.Update(SelectedArtist);
+                            Songs.Update(SelectedSong);
                         }
                     }
                     catch (ArgumentException ex)

@@ -24,7 +24,7 @@ namespace WPF_Client.Updatewindows
         public SongUpdateWindow(Song selectedsong)
         {
             SelectedSong = selectedsong;
-            DataContext = SelectedSong;
+            DataContext = selectedsong;
             InitializeComponent();
             ;
         }
