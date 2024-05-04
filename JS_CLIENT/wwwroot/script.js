@@ -11,14 +11,10 @@ function setupSignalR() {
 
     connection.on("ArtistCreated", (user, message) => {
         getdata();
-        /*console.log(user);
-        console.log(message);*/
     });
 
     connection.on("ArtistDeleted", (user, message) => {
         getdata();
-        /*console.log(user);
-        console.log(message);*/
     });
 
     connection.onclose(async () => {
@@ -44,32 +40,23 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             artists = y;
-            //console.log(artists);
             display();
         });
 }
 
-/*fetch('http://localhost:40338/artist')
-    .then(x => x.json())
-    .then(y => {
-        artists = y;
-        console.log(artists);
-        display();
-    });*/
-
 function display() {
-    document.getElementById('resultarea').innerHTML = "";
+    document.getElementById().innerHTML = "";
     artists.forEach(t => {
-        document.getElementById('resultarea').innerHTML += `<tr>
-                <td >${t.artistId}</td>
+        document.getElementById().innerHTML += `<tr>
+                <td>${t.artistId}</td>
                 <td>${(t.age == 0 ? '-' : t.age)}</td>
                 <td>${t.artistName}</td>
                 <td>${t.debutYear}</td>
                 <td>${t.gender}</td>
                 <td>${t.nationality}</td>
-                <td>${(t.type == 0 ? 'Group' : 'Soloist') }</td>
+                <td>${(t.type == 0 ? 'Group' : 'Soloist')}</td>
                 <td><button type="button" onclick="remove('${t.artistId}')">Delete</button></td>
-            </tr>`
+            </tr>`;
     });
 }
 
