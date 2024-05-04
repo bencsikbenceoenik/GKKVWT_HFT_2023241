@@ -143,35 +143,21 @@ namespace WPF_Client.ViewModels
             set { SetProperty(ref nonCrud, value); }
         }
 
+        private string noncrudinput1;
 
-        //private Song selectedNoncrud;
+        public string Noncrudinput1
+        {
+            get { return noncrudinput1; }
+            set { noncrudinput1 = value; }
+        }
+        
+        private string noncrudinput2;
 
-        //public Song SelectedNoncrud
-        //{
-        //    get { return selectedNoncrud; }
-        //    set
-        //    {
-        //        if (value != null)
-        //        {
-        //            selectedNoncrud = new Song()
-        //            {
-        //                SongTitle = value.SongTitle,
-        //                SongId = value.SongId,
-        //                SongType = value.SongType,
-        //                Artist = value.Artist,
-        //                ArtistId = value.ArtistId,
-        //                Duration = value.Duration,
-        //                Label = value.Label,
-        //                LabelId = value.LabelId,
-        //                Language = value.Language,
-        //                ReleaseDate = value.ReleaseDate
-        //            };
-        //            //SetProperty(ref selectedLabel, value);
-        //            OnPropertyChanged();
-        //            //(DeleteLabelCommand as RelayCommand).NotifyCanExecuteChanged();
-        //        }
-        //    }
-        //}
+        public string Noncrudinput2
+        {
+            get { return noncrudinput2; }
+            set { noncrudinput2 = value; }
+        }
         public ICommand nonCrud1 { get; set; }
         public ICommand nonCrud2 { get; set; }
         public ICommand nonCrud3 { get; set; }
@@ -222,11 +208,7 @@ namespace WPF_Client.ViewModels
                         ErrorMessage = ex.Message;
                     }
                 });
-                var tempa = (SelectedArtist != null);
-                if (Artists != null && SelectedArtist != null)
-                {
-                    var tempb = Artists.Select(t => t.ArtistId).ToList().Contains(SelectedArtist.ArtistId);
-                }
+
                 DeleteArtistCommand = new RelayCommand(() =>
                 {
                     Artists.Delete(SelectedArtist.ArtistId);
@@ -324,31 +306,31 @@ namespace WPF_Client.ViewModels
                 nonCrud1 = new RelayCommand(() =>
                 {
                     NonCrud.Clear();
-                    Songs.rest.Get<Song>($"/Stat/GetSongsByDurationAndArtistGender?durationThreshold={200}&artistGender={"Male"}").ForEach(t => { NonCrud.Add(t); });
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByDurationAndArtistGender?durationThreshold={Noncrudinput1}&artistGender={Noncrudinput2}").ForEach(t => { NonCrud.Add(t); });
                     OnPropertyChanged();
                 });
                 nonCrud2 = new RelayCommand(() =>
                 {
                     NonCrud.Clear();
-                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistsDebutedAfterYear?debutYearThreshold={2018}").ForEach(t => { NonCrud.Add(t); });
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistsDebutedAfterYear?debutYearThreshold={Noncrudinput1}").ForEach(t => { NonCrud.Add(t); });
                     OnPropertyChanged();
                 });
                 nonCrud3 = new RelayCommand(() =>
                 {
                     NonCrud.Clear();
-                    Songs.rest.Get<Song>($"/Stat/GetSongsByLabelValueGreaterThan?thresholdValue={100000000}").ForEach(t => { NonCrud.Add(t); });
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByLabelValueGreaterThan?thresholdValue={Noncrudinput1}").ForEach(t => { NonCrud.Add(t); });
                     OnPropertyChanged();
                 });
                 nonCrud4 = new RelayCommand(() =>
                 {
                     NonCrud.Clear();
-                    Songs.rest.Get<Song>($"/Stat/GetSongsReleasedAfterYearByNationality?releaseYear={2018}&nationality={"South Korean"}").ForEach(t => { NonCrud.Add(t); });
+                    Songs.rest.Get<Song>($"/Stat/GetSongsReleasedAfterYearByNationality?releaseYear={Noncrudinput1}&nationality={Noncrudinput2}").ForEach(t => { NonCrud.Add(t); });
                     OnPropertyChanged();
                 });
                 nonCrud5 = new RelayCommand(() =>
                 {
                     NonCrud.Clear();
-                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistAndLabel?artistName={"BLACKPINK"}&labelName={"YG ENTERTAINMENT"}").ForEach(t => { NonCrud.Add(t); });
+                    Songs.rest.Get<Song>($"/Stat/GetSongsByArtistAndLabel?artistName={Noncrudinput1}&labelName={Noncrudinput2}").ForEach(t => { NonCrud.Add(t); });
                     OnPropertyChanged();
                 });
 

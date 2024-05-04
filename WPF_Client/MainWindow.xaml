@@ -165,8 +165,10 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Column="1">
-                        <Label Padding="10" Content="Name" Background="LightBlue"/>
-                        <TextBox Padding="10" />
+                        <Label Padding="10" Content="Input1" Background="LightBlue"/>
+                        <TextBox Padding="10" Text="{Binding Noncrudinput1}"/>
+                        <Label Padding="10" Content="Input2" Background="LightBlue"/>
+                        <TextBox Padding="10" Text="{Binding Noncrudinput2}"/>
                         <Button Padding="10" Margin="10" Content="NonCrud1" Command="{Binding nonCrud1}"/>
                         <Button Padding="10" Margin="10" Content="NonCrud2" Command="{Binding nonCrud2}"/>
                         <Button Padding="10" Margin="10" Content="NonCrud3" Command="{Binding nonCrud3}"/>
