@@ -45,9 +45,9 @@ async function getdata() {
 }
 
 function display() {
-    document.getElementById().innerHTML = "";
+    document.getElementById('asd').innerHTML = "";
     artists.forEach(t => {
-        document.getElementById().innerHTML += `<tr>
+        document.getElementById('asd').innerHTML += `<tr>
                 <td>${t.artistId}</td>
                 <td>${(t.age == 0 ? '-' : t.age)}</td>
                 <td>${t.artistName}</td>

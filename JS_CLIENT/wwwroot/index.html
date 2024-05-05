@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="StyleSheet.css" />
     <title>Artist UI</title>
 </head>
 <body>
@@ -11,7 +11,25 @@
     <div id="formdiv">
         <label>Artist Name</label>
         <input type="text" id="artistname" />
-        <button type="button" onclick="create()">Create</button>
+        <button type="button" onclick="create(1)">Create</button>
+    </div>
+
+    <div id="updatedformdiv">
+        <label>Artist Id</label>
+        <input type="text" id="artistidtoupdate" />
+        <label>Artist Name</label>
+        <input type="text" id="artistnametoupdate" />
+        <label>Artist Age</label>
+        <input type="text" id="artistagetoupdate" />
+        <label>Artist DebutYear</label>
+        <input type="text" id="artistdebutYeartoupdate" />
+        <label>Artist Gender</label>
+        <input type="text" id="artistgendertoupdate" />
+        <label>Artist Type</label>
+        <input type="text" id="artisttypetoupdate" />
+        <label>Artist Nationality</label>
+        <input type="text" id="artistnationalitytoupdate" />
+        <button type="button" onclick="update(1)">Update</button>
     </div>
 
 
@@ -28,7 +46,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody id="resultarea">
         </tbody>
     </table>
 
@@ -37,23 +55,29 @@
     <div id="formdiv2">
         <label>Label Name</label>
         <input type="text" id="labelname" />
-        <button type="button" onclick="create()">Create</button>
+        <button type="button" onclick="create(2)">Create</button>
     </div>
+
+    <div id="updatedformdiv2">
+        <label>Artist Name</label>
+        <input type="text" id="labelnametoupdate" />
+        <button type="button" onclick="update(2)">Update</button>
+    </div>
+
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Age</th>
                 <th>Name</th>
-                <th>DebutYear</th>
-                <th>Gender</th>
-                <th>Nationality</th>
-                <th>Type</th>
+                <th>Value</th>
+                <th>BasedIn</th>
+                <th>FoundmentDate</th>
+                <th>Founder</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="asd">
+        <tbody id="resultarea2">
         </tbody>
     </table>
 
@@ -62,19 +86,27 @@
     <div id="formdiv3">
         <label>Song Name</label>
         <input type="text" id="songtitle" />
-        <button type="button" onclick="create()">Create</button>
+        <button type="button" onclick="create(3)">Create</button>
     </div>
+
+    <div id="updatedformdiv3">
+        <label>Artist Name</label>
+        <input type="text" id="songtitletoupdate" />
+        <button type="button" onclick="update(3)">Update</button>
+    </div>
+
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Age</th>
-                <th>Name</th>
-                <th>DebutYear</th>
-                <th>Gender</th>
-                <th>Nationality</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>ReleaseDate</th>
+                <th>Language</th>
                 <th>Type</th>
+                <th>Artist</th>
+                <th>Label</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -82,8 +114,41 @@
         </tbody>
     </table>
 
+     <h1>
+    NonCrud Catalog
+    <button onclick="shownoncrud(1)">GetSongsByDurationAndArtistGender<!--Nyomj Meg1--></button>
+    <button onclick="shownoncrud(2)">GetSongsByArtistsDebutedAfterYear<!--Nyomj Meg2--></button>
+    <button onclick="shownoncrud(3)">GetSongsByLabelValueGreaterThan<!--Nyomj Meg3--></button>
+    <button onclick="shownoncrud(4)">GetSongsReleasedAfterYearByNationality<!--Nyomj Meg4--></button>
+    <button onclick="shownoncrud(5)">GetSongsByArtistAndLabel<!--Nyomj Meg5--></button>
+     </h1>
+
+    <div id="noncrudformdiv">
+        <label>Input1</label>
+        <input type="text" id="input1" />
+        <label>Input2</label>
+        <input type="text" id="input2" />
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>ReleaseDate</th>
+                <th>Language</th>
+                <th>Type</th>
+                <th>Artist</th>
+                <th>Label</th>
+            </tr>
+        </thead>
+        <tbody id="noncrudarea">
+        </tbody>
+    </table>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
 
-    <script src="script.js"></script>
+    <script src="JavaScript.js"></script>
 </body>
 </html>

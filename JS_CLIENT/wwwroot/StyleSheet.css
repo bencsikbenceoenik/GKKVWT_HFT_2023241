@@ -1,0 +1,66 @@
+﻿table, th, td {
+    border: 1px solid black;
+    margin: 5px;
+}
+
+th, tr {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: lightblue;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#updatedformdiv, #updatedformdiv2, #updatedformdiv3, #noncrudformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #updatedformdiv label, input, button {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #updatedformdiv label {
+        font-weight: bolder;
+    }
+    
+    #updatedformdiv2 label, input, button {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #updatedformdiv2 label {
+        font-weight: bolder;
+    }
+    
+    #updatedformdiv3 label, input, button {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #updatedformdiv3 label {
+        font-weight: bolder;
+    }
+
+#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #formdiv label, input, button {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #formdiv label {
+        font-weight: bolder;
+    }

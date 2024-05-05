@@ -13,6 +13,21 @@ table {
     width: 100%;
 }
 
+#updatedformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updatedformdiv label, input, button {
+    margin: 10px; 
+    padding: 7px;
+}
+
+#updatedformdiv label {
+    font-weight: bolder;
+}
+
 #formdiv{
     display: flex;
     flex-direction: column;
