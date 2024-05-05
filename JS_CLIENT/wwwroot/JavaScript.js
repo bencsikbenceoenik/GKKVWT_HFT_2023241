@@ -1,10 +1,10 @@
 ﻿let artists = [];
 let labels = [];
 let songs = [];
+let noncruddata = [];
 let connection = null;
-let artistToUpdate = null;
-let labelToUpdate = null;
-let songToUpdate = null;
+let songartistToUpdate = null;
+let songlabelToUpdate = null;
 getdata(1);
 getdata(2);
 getdata(3);
@@ -70,6 +70,14 @@ async function start() {
     }
 };
 
+async function noncrudgetdata(url) {
+    await fetch(url)
+        .then(x => x.json())
+        .then(y => {
+            noncruddata = y;
+            display();
+        });
+}
 async function getdata(num) {
     switch (num) {
         case 1:
@@ -152,6 +160,21 @@ function display() {
                 <button type="button" onclick="showupdate(${t.songId},3)">Update</button></td>
             </tr>`;
     });
+
+    document.getElementById('noncrudarea').innerHTML = "";
+    noncruddata.forEach(t => {
+        document.getElementById('noncrudarea').innerHTML += `<tr>
+                <td>${t.songId}</td>
+                <td>${t.songTitle}</td>
+                <td>${t.duration}</td>
+                <td>${t.releaseDate}</td>
+                <td>${t.language}</td>
+                <td>${(t.songType)}</td>
+                <td>${(t.artist != null ? t.artist.artistName : ' ')}</td>
+                <td>${t.label != null ? t.label.labelName : ' '}</td>
+            </tr>`;
+    });
+
 }
 
 function showupdate(id, num) {
@@ -168,28 +191,25 @@ function showupdate(id, num) {
             artistToUpdate = artists.find(t => t['artistId'] == id);
             break;
         case 2:
+            document.getElementById('labelidtoupdate').value = labels.find(t => t['labelId'] == id)['labelId'];
             document.getElementById('labelnametoupdate').value = labels.find(t => t['labelId'] == id)['labelName'];
-            //document.getElementById('artistnametoupdate').value = artists.find(t => t['artistId'] == id)['artistName'];
-            //document.getElementById('artistidtoupdate').value = artists.find(t => t['artistId'] == id)['artistId'];
-            //document.getElementById('artistagetoupdate').value = artists.find(t => t['artistId'] == id)['age'];
-            //document.getElementById('artistdebutYeartoupdate').value = artists.find(t => t['artistId'] == id)['debutYear'];
-            //document.getElementById('artistgendertoupdate').value = artists.find(t => t['artistId'] == id)['gender'];
-            //document.getElementById('artisttypetoupdate').value = artists.find(t => t['artistId'] == id)['type'];
-            //document.getElementById('artistnationalitytoupdate').value = artists.find(t => t['artistId'] == id)['nationality'];
+            document.getElementById('labelvaluetoupdate').value = labels.find(t => t['labelId'] == id)['labelValue'];
+            document.getElementById('labelbasedintoupdate').value = labels.find(t => t['labelId'] == id)['basedIn'];
+            document.getElementById('labelfoundmentdatetoupdate').value = labels.find(t => t['labelId'] == id)['foundmentDate'];
+            document.getElementById('labeltypefoundertoupdate').value = labels.find(t => t['labelId'] == id)['founder'];
             document.getElementById('updatedformdiv2').style.display = 'flex';
             labelToUpdate = labels.find(t => t['labelId'] == id);
             break;
         case 3:
+            document.getElementById('songidtoupdate').value = songs.find(t => t['songId'] == id)['songId'];
             document.getElementById('songtitletoupdate').value = songs.find(t => t['songId'] == id)['songTitle'];
-            //document.getElementById('artistnametoupdate').value = artists.find(t => t['artistId'] == id)['artistName'];
-            //document.getElementById('artistidtoupdate').value = artists.find(t => t['artistId'] == id)['artistId'];
-            //document.getElementById('artistagetoupdate').value = artists.find(t => t['artistId'] == id)['age'];
-            //document.getElementById('artistdebutYeartoupdate').value = artists.find(t => t['artistId'] == id)['debutYear'];
-            //document.getElementById('artistgendertoupdate').value = artists.find(t => t['artistId'] == id)['gender'];
-            //document.getElementById('artisttypetoupdate').value = artists.find(t => t['artistId'] == id)['type'];
-            //document.getElementById('artistnationalitytoupdate').value = artists.find(t => t['artistId'] == id)['nationality'];
+            document.getElementById('songtypetoupdate').value = songs.find(t => t['songId'] == id)['songType'];
+            document.getElementById('songreleasedatetoupdate').value = songs.find(t => t['songId'] == id)['releaseDate'];
+            document.getElementById('songdurationtoupdate').value = songs.find(t => t['songId'] == id)['duration'];
+            document.getElementById('songlanguagetoupdate').value = songs.find(t => t['songId'] == id)['language'];
             document.getElementById('updatedformdiv3').style.display = 'flex';
-            songToUpdate = songs.find(t => t['songId'] == id);
+            songartistToUpdate = songs.find(t => t['songId'] == id).artist;
+            songlabelToUpdate = songs.find(t => t['songId'] == id).label;
             break;
         default:
             break;
@@ -206,13 +226,13 @@ function update(num) {
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(
                     {
-                        artistName: /*name*/document.getElementById('artistnametoupdate').value,
-                        artistId: /*artistToUpdate.artistId*/document.getElementById('artistidtoupdate').value,
-                        age: /*artistToUpdate.age*/document.getElementById('artistagetoupdate').value,
-                        debutYear: /*artistToUpdate.debutYear*/document.getElementById('artistdebutYeartoupdate').value,
-                        gender: /*artistToUpdate.gender*/document.getElementById('artistgendertoupdate').value,
-                        type: /*artistToUpdate.type*/Number(document.getElementById('artisttypetoupdate').value),
-                        nationality: /*artistToUpdate.nationality*/document.getElementById('artistnationalitytoupdate').value
+                        artistName: document.getElementById('artistnametoupdate').value,
+                        artistId: document.getElementById('artistidtoupdate').value,
+                        age: document.getElementById('artistagetoupdate').value,
+                        debutYear: document.getElementById('artistdebutYeartoupdate').value,
+                        gender: document.getElementById('artistgendertoupdate').value,
+                        type: Number(document.getElementById('artisttypetoupdate').value),
+                        nationality: document.getElementById('artistnationalitytoupdate').value
                     }),
             })
                 .then(response => response)
@@ -226,8 +246,12 @@ function update(num) {
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(
                     {
-                        labelName: name,
-                        labelId: labelIdToUpdate
+                        labelId: document.getElementById('labelidtoupdate').value,
+                        labelName: document.getElementById('labelnametoupdate').value,
+                        labelValue: document.getElementById('labelvaluetoupdate').value,
+                        basedIn: document.getElementById('labelbasedintoupdate').value,
+                        foundmentDate: document.getElementById('labelfoundmentdatetoupdate').value,
+                        founder: document.getElementById('labeltypefoundertoupdate').value
                     }),
             })
                 .then(response => response)
@@ -241,8 +265,16 @@ function update(num) {
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(
                     {
-                        songTitle: name,
-                        songId: songIdToUpdate
+                        songId: document.getElementById('songidtoupdate').value,
+                        songTitle: document.getElementById('songtitletoupdate').value,
+                        songType: document.getElementById('songtypetoupdate').value,
+                        releaseDate: document.getElementById('songreleasedatetoupdate').value,
+                        duration: document.getElementById('songdurationtoupdate').value,
+                        language: document.getElementById('songlanguagetoupdate').value,
+                        artistId: songartistToUpdate.artistId,
+                        artist: songartistToUpdate,
+                        labelId: songlabelToUpdate.labelId,
+                        label: songlabelToUpdate
                     }),
             })
                 .then(response => response)
@@ -345,21 +377,21 @@ function shownoncrud(num) {
             <input type="text" id="input1" />
             <label>artistGender</label>
             <input type="text" id="input2" />
-            <button type="button" onclick="noncrud()">Send GetSongsByDurationAndArtistGender</button>`;
+            <button type="button" onclick="noncrud(1)">Send GetSongsByDurationAndArtistGender</button>`;
             document.getElementById('noncrudformdiv').style.display = "flex"
             break;
         case 2:
             document.getElementById('noncrudformdiv').innerHTML = `
             <label>debutYearThreshold</label>
             <input type="text" id="input1" />
-            <button type="button" onclick="noncrud()">Send GetSongsByArtistsDebutedAfterYear</button>`;
+            <button type="button" onclick="noncrud(2)">Send GetSongsByArtistsDebutedAfterYear</button>`;
             document.getElementById('noncrudformdiv').style.display = "flex"
             break;
         case 3:
             document.getElementById('noncrudformdiv').innerHTML = `
             <label>thresholdValue</label>
             <input type="text" id="input1" />
-            <button type="button" onclick="noncrud()">Send GetSongsByLabelValueGreaterThan</button>`;
+            <button type="button" onclick="noncrud(3)">Send GetSongsByLabelValueGreaterThan</button>`;
             document.getElementById('noncrudformdiv').style.display = "flex"
             break;
         case 4:
@@ -368,7 +400,7 @@ function shownoncrud(num) {
             <input type="text" id="input1" />
             <label>nationality</label>
             <input type="text" id="input2" />
-            <button type="button" onclick="noncrud()">Send GetSongsReleasedAfterYearByNationality</button>`;
+            <button type="button" onclick="noncrud(4)">Send GetSongsReleasedAfterYearByNationality</button>`;
             document.getElementById('noncrudformdiv').style.display = "flex"
             break;
         case 5:
@@ -377,10 +409,41 @@ function shownoncrud(num) {
             <input type="text" id="input1" />
             <label>labelName</label>
             <input type="text" id="input2" />
-            <button type="button" onclick="noncrud()">Send GetSongsByArtistAndLabel</button>`;
+            <button type="button" onclick="noncrud(5)">Send GetSongsByArtistAndLabel</button>`;
             document.getElementById('noncrudformdiv').style.display = "flex"
             break;
         default:
             break;
+    }
+}
+
+function noncrud(num) {
+    let input1;
+    let input2;
+    switch (num) {
+        case 1:
+            input1 = document.getElementById('input1').value;
+            input2 = document.getElementById('input2').value;
+            noncrudgetdata(`http://localhost:40338/Stat/GetSongsByDurationAndArtistGender?durationThreshold=${input1}&artistGender=${input2}`);
+            break;
+        case 2:
+            input1 = document.getElementById('input1').value;
+            noncrudgetdata(`http://localhost:40338/Stat/GetSongsByArtistsDebutedAfterYear?debutYearThreshold=${input1}`);
+            break;
+        case 3:
+            input1 = document.getElementById('input1').value;
+            noncrudgetdata(`http://localhost:40338/Stat/GetSongsByLabelValueGreaterThan?thresholdValue=${input1}`);
+            break;
+        case 4:
+            input1 = document.getElementById('input1').value;
+            input2 = document.getElementById('input2').value;
+            noncrudgetdata(`http://localhost:40338/Stat/GetSongsReleasedAfterYearByNationality?releaseYear=${input1}&nationality=${input2}`);
+            break;
+        case 5:
+            input1 = document.getElementById('input1').value;
+            input2 = document.getElementById('input2').value;
+            noncrudgetdata(`http://localhost:40338/Stat/GetSongsByArtistAndLabel?artistName=${input1}&labelName=${input2}`);
+            break;
+        default:
     }
 }
