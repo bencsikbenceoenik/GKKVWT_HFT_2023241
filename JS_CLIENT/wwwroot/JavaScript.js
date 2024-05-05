@@ -217,10 +217,9 @@ function showupdate(id, num) {
 }
 
 function update(num) {
-    let name;
     switch (num) {
         case 1:
-            name = document.getElementById('artistnametoupdate').value;
+            document.getElementById('updatedformdiv').style.display = "none";
             fetch('http://localhost:40338/artist', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', },
@@ -240,7 +239,7 @@ function update(num) {
                 .catch((error) => { console.error('Error:', error); });
             break;
         case 2:
-            name = document.getElementById('labelnametoupdate').value;
+            document.getElementById('updatedformdiv2').style.display = "none";
             fetch('http://localhost:40338/label', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', },
@@ -259,7 +258,7 @@ function update(num) {
                 .catch((error) => { console.error('Error:', error); });
             break;
         case 3:
-            name = document.getElementById('songtitletoupdate').value;
+            document.getElementById('updatedformdiv3').style.display = "none";
             fetch('http://localhost:40338/song', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', },
